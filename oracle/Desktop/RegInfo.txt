@@ -1,0 +1,6 @@
+GroupID="Change Me"
+Name="Change Me"
+Description="Change Me"
+Region="APAC"
+City="Sydney"
+

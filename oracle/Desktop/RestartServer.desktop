@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Restart Server
+Comment=Restart SErver
+Exec=/home/oracle/AnkiNodeDrive/scripts/restartServer.sh
+Icon=/home/oracle/AnkiNodeDrive/icons/Restart.jpg
+Terminal=false
+Type=Application
+Categories=Application;

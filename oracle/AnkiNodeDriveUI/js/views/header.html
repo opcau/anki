@@ -1,0 +1,58 @@
+
+<style>
+  .pac-container {
+    z-index: 1051 !important;
+}
+</style>
+
+<h3>&nbsp;&nbsp;&nbsp;Anki Node Drive URL: 
+  <input id="hostPort" data-bind="ojComponent: {component: 'ojInputText', value: hostPort}" />
+  
+<input id="test" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Test'}"/>
+
+<input id="Refresh" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Refresh'}"/>
+<input id="resetLaps" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Reset Laps'}"/>
+<input id="restartServer" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Restart Server'}"/><br>
+&nbsp;&nbsp;&nbsp;Group: <input style="max-width: 10em" id="groupId" data-bind="ojComponent: {component: 'ojInputText', value: groupId, readOnly: true}" />
+<!--
+&nbsp;&nbsp;&nbsp;Location: Lat: <input id="locationLat" type="text" value="-33.7972786" size="10">
+Long: <input id="locationLong" type="text" value="151.1438264" size="10">
+<input id="getlocation" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Get Location'}"/>
+<input id="picklocation" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Pick Location'}"/>
+-->
+</h3>
+<div id="dialogWrapper">
+  <div style="display:none" id="testModalDialog" title="Test Result" 
+       data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+     <div id="testDialogText" class="oj-dialog-body"></div>
+     <div class="oj-dialog-footer">
+        <button id="testOkButton" data-bind="ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+      </div>
+  </div>
+</div>
+<div id="dialogWrapperMap">
+  <div style="display:none" id="mapModalDialog" title="Test Result" 
+       data-bind="ojComponent:{component: 'ojDialog', rootAttributes: { style: 'width: 610px;'}, initialVisibility: 'hide'}">
+    <div id="mapDialogText" class="oj-dialog-body"></div>
+    Enter Address: <input type="text" id="addressInput" style="width: 200px;"/>
+     <div id="mapComponent" style="width: 600px; height: 400px;"></div>
+
+     <div class="oj-dialog-footer">
+       Latitude:&nbsp;&nbsp; <input type="text" id="latText" readonly style="width: 150px;"/>&nbsp;&nbsp;
+       Longitude:&nbsp;&nbsp;  <input type="text" id="longText" readonly style="width: 150px;">
+      <button id="mapOkButton" data-bind="ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+      </div>
+  </div>
+</div>

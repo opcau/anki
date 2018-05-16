@@ -1,0 +1,60 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+<h2><span id="thisCarName" data-bind="text: carName"></span></h2>
+-->
+
+<h2><span id="thisCarName" data-bind="text: carName">car</span></h2>
+<img id="carImage" width=150 data-bind="attr: {src: carImage()}"/>
+<h3>Connect</h3>
+<form class="mycar">
+  <div class="oj-form-layout">
+    <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline oj-form-no-dividers">
+      <div class="oj-flex">  
+        <div class="oj-flex-item oj-padding-lg-horizontal">
+          <input id="connectedSwitch" data-bind="ojComponent: {component: 'ojSwitch', value: connectCheckbox, optionChange: connectChange }" />
+        </div>
+        <div class="oj-flex-item">
+          <img id="statusImage" data-bind="attr: {src: statusImage()}"/>
+        </div>
+      </div>
+      <div class="oj-flex">  
+        <div class="oj-flex-item oj-padding-lg-horizontal">
+      <input id="startButton" type="button" 
+             data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Start' }"/>
+        </div>
+        <div class="oj-flex-item">
+      <input id="stopButton" type="button" 
+             data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Stop'}"/>
+        </div>
+      </div>
+      <h3>Speed</h3>
+      <input id="speed-slider" style="height: 150px"
+             data-bind="ojComponent: {
+		    component: 'ojSlider', 
+		    orientation: 'vertical',
+		    max:1200,
+		    min:0, 
+		    step:100, 
+		    value:speedValue, optionChange: speedChange
+		    }"/><span id="curr-value" data-bind="text: speedValue"></span><br/>
+      <h3>Lane</h3>
+      <span id="curr-value" data-bind="text: laneValue"></span><br/>
+      <input id="lane-slider" style="width: 100px"
+             data-bind="ojComponent: {
+		    component: 'ojSlider', 
+		    orientation: 'horizontal',
+		    max:4,
+		    min:1, 
+		    step:1, 
+		    value:laneValue, optionChange: laneChange
+		    }"/><br/>
+      <input id="uturnButton" type="button" 
+             data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'U-Turn'}"/><br/>
+    </div>
+  </div>
+</form>

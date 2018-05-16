@@ -1,0 +1,51 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<h1>Track Maps</h1>
+
+<div id="form-container" class="oj-form-layout">
+  <div class="oj-form">
+    <div class="oj-flex">  
+      <div class="oj-flex-item">
+  <label for="carSelect">Car to use:  </label>
+  <select id="carSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                                    value: carToUse,
+                                                    rootAttributes: {style:'max-width:20em'}}">
+    <option value="Skull">Skull</option>
+    <option value="Thermo">Thermo</option>
+    <option value="Ground%20Shock">Ground Shock</option>
+    <option value="Guardian">Guardian</option>
+    <option value="Big%20Bang">Big Bang</option>
+    <option value="Nuke">Nuke</option>
+    <option value="X52">X52</option>
+    <option value="Free%20Wheel">Free Wheel</option>
+  </select>
+<input id="scantrack" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Scan Track'}"/>
+    <div class="oj-flex">  
+      <div class="oj-flex-item">
+  <input id="displaymap" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Display Map'}"/>
+  <input id="loadmap" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Load Previous Map'}"/>
+  <input id="savemap" type="button" 
+       data-bind="click: buttonClick,
+                      ojComponent: {component: 'ojButton', label: 'Save Current Map'}"/>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="oj-flex">  
+      <div class="oj-flex-item">
+
+<img id="mapImage" width=500 data-bind="attr: {src: mapImage()}"/>
+      </div>
+    </div>
+  </div>
+</div>

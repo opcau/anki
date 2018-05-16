@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>Anki Node Drive UI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script data-main="js/main" src="js/libs/require/require.js" type="text/javascript"></script>
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?libraries=places&key=AIzaSyDvFPuQWcqHn_OoJgKPGspdF5Zqle_JDCQ'></script>
+    <link href="css/libs/oj/v2.3.0/alta/oj-alta-min.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body> 
+  <center><h1>Anki Node Drive UI</h1></center>
+  <div id="tabs-container">
+  <div id="tabs" data-bind="ojComponent:{component: 'ojTabs'}">
+    <ul>
+      <li><span>Controls</span></li>
+      <li><span>Maps</span></li>
+    </ul>
+
+    <!-- tab contents -->
+    <div id="tabs-1">
+  <div data-bind="ojModule: {name: 'header'}"></div>
+    <div id="panelPage">
+      <div id="carControls" class="oj-flex">
+        <div class="oj-panel oj-margin demo-panel-customizations" id="0Controls" style="display:none;">
+          <center>
+            <div data-bind="ojModule: {name: 'car', params: '0'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="1Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '1'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="2Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '2'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="3Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '3'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="4Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '4'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="5Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '5'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="6Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '6'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="7Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '7'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="8Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '8'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="9Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '9'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="10Controls" style="display:none;">
+          <center>
+            <div data-bind="ojModule: {name: 'car', params: '10'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="11Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '11'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="12Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '12'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="13Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '13'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="14Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '14'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="15Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '15'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="16Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '16'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="17Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '17'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="18Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '18'}"></div>
+          </center>
+        </div>
+        <div class="oj-panel oj-margin demo-panel-customizations" id="19Controls" style="display:none;">
+          <center>
+          <div data-bind="ojModule: {name: 'car', params: '19'}"></div>
+          </center>
+        </div>      </div>
+    </div>    </div>
+    <div id="tabs-2">
+      <div data-bind="ojModule: {name: 'maps'}"></div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>
