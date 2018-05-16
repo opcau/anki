@@ -7,11 +7,11 @@ exports.output = 1;
 exports.input = true;
 exports.version = '1.0.0';
 exports.author = 'John Graves';
-exports.options = { carname: "Skull", speed: 500, speedupdates: false };
+exports.options = { carname: "All", speed: 500, speedupdates: false };
 exports.cloning = false;
 
 exports.html = `<div class="padding">
-  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice">@(Car Name)</div>
+  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice">@(Car Name)</div>
   <hr/>
   <section class="m">
     <label>Speed</label>
