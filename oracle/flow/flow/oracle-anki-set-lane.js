@@ -11,7 +11,7 @@ exports.options = { carname: "Skull", lane: 2 };
 exports.cloning = false;
 
 exports.html = `<div class="padding">
-  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice">@(Car Name)</div>
+  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice">@(Car Name)</div>
   <hr/>
   <h2>Set lane OR set position value between -64(Left) and +64(Right).  (-24/24 are lanes two and three.)</h2>
   <div data-jc="dropdown" data-jc-path="lane" data-jc-config="required:false;items:Left,Left Middle,Right Middle, Right">@(Lane)</div>
@@ -27,7 +27,7 @@ ON('save.oracleankisetlane', function(component, options) {
       case "Ground Shock": component.color = "#1C2D7C"; break;
       case "Big Bang": component.color = "#6d7563"; break;
       case "Nuke": component.color = "#9cE667"; break;
-      case "Nuke Ice": component.color = "#FDFDFD"; break;
+      case "Nuke Phantom": component.color = "#FDFDFD"; break;
       case "X52": component.color = "#DF2a32"; break;
       case "X52 Ice": component.color = "#F0F0FF"; break;
       case "Free Wheel": component.color = "#A2C84E"; break;
