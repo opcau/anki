@@ -40,7 +40,7 @@ This component connects or disconnects a car.
 __Dynamic arguments__:
 Are performed via FlowData repository and can be used for URL address. Use \`repository\` component for creating of dynamic arguments. Dynamic values are replaced in the form \`{key}\`:
 
-- carname e.g. Nuke`;
+- carname e.g. Nuke
 - condiscon e.g. Connect or Disconnect`;
 
 exports.install = function(instance) {
