@@ -135,11 +135,8 @@ module.exports = function() {
         var newClientConnection = clientConnection.slice(0);
         for(var i=0;i<numClients;i++) {
           if(clientConnection[i].events === "all" || clientConnection[i].events.indexOf('battery') > -1) {  // This client wants this event
-            console.log("This client wants battery events."+i);
-            console.log("Compare: "+clientConnection[i].cars+" =? "+displayName.toLowerCase());
             if(clientConnection[i].cars === "all" || clientConnection[i].cars.indexOf(displayName.toLowerCase()) > -1) { // This client wants this car
               try {
-                console.log("Sending battery to client: "+i);
                 clientConnection[i].socket.send(JSON.stringify(args.data));
               } catch (ex) {
                 console.log("error sending.  Removing client: "+ex);
@@ -306,8 +303,6 @@ module.exports = function() {
         var newClientConnection = clientConnection.slice(0);
         for(var i=0;i<numClients;i++) {
           if(clientConnection[i].events === "all" || clientConnection[i].events.indexOf('speed') > -1) {  // This client wants this event
-            console.log("This client wants speed events."+i);
-            console.log("Compare: "+clientConnection[i].cars+" =? "+displayName.toLowerCase());
             if(clientConnection[i].cars === "all" || clientConnection[i].cars.indexOf(displayName.toLowerCase()) > -1) { // This client wants this car
               try {
                 clientConnection[i].socket.send(JSON.stringify(args.data));
@@ -399,11 +394,8 @@ module.exports = function() {
         var newClientConnection = clientConnection.slice(0);
         for(var i=0;i<numClients;i++) {
           if(clientConnection[i].events === "all" || clientConnection[i].events.indexOf('tracktransition') > -1) {  // This client wants this event
-            console.log("This client wants tracktransition events."+i);
-            console.log("Compare: "+clientConnection[i].cars+" =? "+displayName.toLowerCase());
             if(clientConnection[i].cars === "all" || clientConnection[i].cars.indexOf(displayName.toLowerCase()) > -1) { // This client wants this car
               try {
-                console.log("Sending tracktransition event to client: "+i);
                 clientConnection[i].socket.send(JSON.stringify(args.data));
               } catch (ex) {
                 console.log("error sending.  Removing client: "+ex);
@@ -416,7 +408,6 @@ module.exports = function() {
       }
 
       else if (msgId == 0x2b) { // ANKI_VEHICLE_MSG_V2C_VEHICLE_DELOCALIZED
-        console.log("Message[0x"+msgId.toString(16)+"][Vehicle Delocalized]: ",data);
         //
         // Send simple off track
         //
@@ -435,8 +426,6 @@ module.exports = function() {
               timeout: 1000 //response timeout 
           }
         }
-        console.log("Posting to: "+fullUrl);
-        console.log("Data: "+util.inspect(args.data,false,null));
         var req = client.post(fullUrl, args, function(data,response) { });
         req.on('requestTimeout', function (req) { console.log('request has expired'); req.abort(); });
         req.on('responseTimeout', function (res) { console.log('response has expired'); });
@@ -449,10 +438,7 @@ module.exports = function() {
         var newClientConnection = clientConnection.slice(0);
         for(var i=0;i<numClients;i++) {
           if(clientConnection[i].events === "all" || clientConnection[i].events.indexOf('offtrack') > -1) {  // This client wants this event
-            console.log("This client wants offtrack events."+i);
-            console.log("Compare: "+clientConnection[i].cars+" =? "+displayName.toLowerCase());
             if(clientConnection[i].cars === "all" || clientConnection[i].cars.indexOf(displayName.toLowerCase()) > -1) { // This client wants this car
-              console.log("This client '"+i+"' wants events for car "+displayName);
               try {
                 clientConnection[i].socket.send(JSON.stringify(args.data));
               } catch (ex) {
