@@ -6,6 +6,13 @@
         <script type="text/javascript" src="logtail1.js"></script>
         <link href="logtail.css" rel="stylesheet" type="text/css">
         <script>
+          function getSpeedoHostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":7800";
+          }
           function getServerHostPort() {
             var thisHost = decodeURIComponent(window.location.href);
             var l = document.createElement("a");
@@ -62,6 +69,16 @@
             var sl = document.getElementById("flowLink");
             sl.appendChild(a);
           }
+          function speedosLink() {
+            var url=getSpeedoHostPort()+"/";
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(url);
+            a.appendChild(linkText);
+            a.title = "Speedometers Link";
+            a.href = url;
+            var sl = document.getElementById("speedosLink");
+            sl.appendChild(a);
+          }
         </script>
     </head>
     <body background="bg.jpg">
@@ -86,6 +103,9 @@
                 </td></tr>
                 <tr><td>Drive UI: </td><td>
                   <div id='driveLink'"> <script>driveLink();</script> </div>
+                </td></tr>
+                <tr><td>Speedometers: </td><td>
+                  <div id='speedosLink'"> <script>speedosLink();</script> </div>
                 </td></tr>
                 <tr><td>REST API: </td><td>
                   <div id='restAPILink'"> <script>restAPILink();</script> </div>

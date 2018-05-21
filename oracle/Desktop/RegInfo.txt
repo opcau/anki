@@ -1,6 +1,6 @@
-GroupID="Change Me"
-Name="Change Me"
-Description="Change Me"
+GroupID="John's Group"
+Name="Pi v6 Testing"
+Description="Pi V6 Testing"
 Region="APAC"
 City="Sydney"
 
