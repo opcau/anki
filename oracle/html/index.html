@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Oracle - Anki Demo</title>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="logtail1.js"></script>
+        <link href="logtail.css" rel="stylesheet" type="text/css">
+        <script>
+          function getServerHostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":7801";
+          }
+          function getDriveHostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":7901";
+          }
+          function getFlowHostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":8000";
+          }
+
+          function runAction(actionName) {
+            var url = getServerHostPort()+actionName;
+            $.get( url, function( data ) {});
+          }
+
+          function restAPILink() {
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(getServerHostPort());
+            a.appendChild(linkText);
+            a.title = "REST API Link";
+            a.href = getServerHostPort();
+            var sl = document.getElementById("restAPILink");
+            sl.appendChild(a);
+          }
+          function driveLink() {
+            var url=getDriveHostPort()+"/";
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(url);
+            a.appendChild(linkText);
+            a.title = "Rescue Link";
+            a.href = url;
+            var sl = document.getElementById("driveLink");
+            sl.appendChild(a);
+          }
+          function flowLink() {
+            var url=getFlowHostPort()+"/";
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(url);
+            a.appendChild(linkText);
+            a.title = "Rescue Link";
+            a.href = url;
+            var sl = document.getElementById("flowLink");
+            sl.appendChild(a);
+          }
+        </script>
+    </head>
+    <body background="bg.jpg">
+        <img src="oracle-anki.png">
+        <hr/>
+        <table>
+          <tr>
+            <td valign='top'>
+              <h3>Commands</h3>
+              <button type="submit" onclick="runAction('/exit')">Restart Server</button>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">
+              <h3>Local Links</h3>
+              <table>
+                <tr><td>Documentation: </td><td>
+                  <a href='https://opcau.github.io/anki'>https://opcau.github.io/anki</a>
+                </td></tr>
+                <tr><td>Flow UI: </td><td>
+                  <div id='flowLink'"> <script>flowLink();</script> </div>
+                </td></tr>
+                <tr><td>Drive UI: </td><td>
+                  <div id='driveLink'"> <script>driveLink();</script> </div>
+                </td></tr>
+                <tr><td>REST API: </td><td>
+                  <div id='restAPILink'"> <script>restAPILink();</script> </div>
+                </td></tr>
+              </table>
+            </td>
+            <td valign="top">
+              <h3>Oracle/Anki Server Log</h3>
+<div id="logdiv1" style="width: 500px;height: 400px;background: white; overflow:auto;border: 2px solid #43AD21; border-radius:15px;"><pre id="data1">Loading...</pre></div>
+            </td>
+          </tr>
+        </table>
+    </body>
+</html>
