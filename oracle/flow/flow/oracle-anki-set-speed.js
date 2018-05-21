@@ -78,9 +78,10 @@ exports.install = function(instance) {
 
 
     instance.carname = instance.options.carname;
-    if(flowdata.repository !== undefined && flowdata.repository.carname !== undefined) { instance.carname = flowdata.repository.carname; }
+    if(flowdata.repository !== undefined && flowdata.repository.carname !== undefined) { instance.carname = flowdata.repository.carname; } else { flowdata.repository.carname = instance.carname; }
     var speed = instance.options.speed;
-    if(flowdata.repository !== undefined && flowdata.repository.speed !== undefined) { speed = flowdata.repository.speed; }
+    if(flowdata.repository !== undefined && flowdata.repository.speed !== undefined) { speed = flowdata.repository.speed; } else { flowdata.repository.speed = speed; }
+
 
     var finalUrl = "http://localhost:7801/setSpeed/"+instance.carname+"/"+speed;
     U.request(finalUrl, flags, null, function(err, data, status, headers, host) {
@@ -90,7 +91,9 @@ exports.install = function(instance) {
         instance.send2(flowdata);
       } else if (err)
         instance.status("Error");
-        instance.error(err.message);
+        if(err !== null) {
+          instance.error(err);
+        }
     }, cookies || cookies2, headers);
   };
 

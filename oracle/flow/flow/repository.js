@@ -41,6 +41,7 @@ exports.install = function(instance) {
 	instance.reconfigure = function() {
 		try {
 			if (instance.options.code) {
+
 				instance.status('');
 				var code = `var set = (key, value) => flowdata.set(key, value);
 				var get = key => flowdata.get(key);

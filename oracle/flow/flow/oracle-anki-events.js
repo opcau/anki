@@ -114,7 +114,6 @@ exports.install = function(instance) {
     }
     socketUrl = socketUrl + "&events="+eventlist;
 
-console.log("Socket url: "+socketUrl);
     const WebSocket = require('html5-websocket');
     const ReconnectingWebSocket = require('reconnecting-websocket');
     instance.debug("WebSocket: Connect to: "+socketUrl);
@@ -130,9 +129,7 @@ console.log("Socket url: "+socketUrl);
   });
 
   instance.on('options', function() {
-console.log("Options changed... Close old socket.");
     if(instance.websocket !== undefined) {
-console.log("Closing.");
       instance.websocket.close(code=1000, reason='Reconfigure', {keepClosed: true})
     }
     instance.reconfigure();

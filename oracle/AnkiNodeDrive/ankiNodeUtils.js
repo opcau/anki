@@ -162,13 +162,13 @@ var turnOffSdkMode = function(writerCharacteristic) {
 }
 
 var sdkModeOn = function(carName) {
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     turnOnSdkMode(writerCharacteristic);
   });
 }
 
 var sdkModeOff = function(carName) {
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     turnOffSdkMode(writerCharacteristic);
   });
 }
@@ -178,14 +178,14 @@ var sdkModeOff = function(carName) {
 //////////////////////////////////////////////////////////
 var turnOnLogging = function(carName) {
   console.log("turn on logging for "+carName);
-  getReaderCharacteristic(carName).then(function(readerCharacteristic){
+  getReaderCharacteristic(carName.toLowerCase()).then(function(readerCharacteristic){
     readerCharacteristic.notify(true, function(err) {
     });
     readerCharacteristic.on('read', function(data, isNotification) {
       var address="00:00:00:00:00:00";
       var displayName="Car";
       for(var i=0; i<carList.length;i++) {
-        if(carList[i].carName == carName || carList[i].address == carName) {
+        if(carList[i].carName.toLowerCase() == carName.toLowerCase() || carList[i].address == carName) {
           address = peripheralList[i].address;
           displayName = carList[i].displayName;
         }
@@ -200,7 +200,7 @@ var turnOnLogging = function(carName) {
 // Set Lane Offset - What lane the car should 'start' in.
 //////////////////////////////////////////////////////////
 var setLaneOffset = function(carName,change) {
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     offsetMessage = new Buffer(6);
     offsetMessage.writeUInt8(0x05, 0); // ANKI_VEHICLE_MSG_C2V_SET_OFFSET_FROM_ROAD_CENTER_SIZE
     offsetMessage.writeUInt8(0x2c, 1); // ANKI_VEHICLE_MSG_C2V_SET_OFFSET_FROM_ROAD_CENTER
@@ -225,7 +225,7 @@ var disconnectCar = function(carName) {
   var peripheral = null;
   // See if we are already connected.
   for(var i=0; i<carList.length;i++) {
-    if(carList[i].carName == carName || carList[i].address == carName) {
+    if(carList[i].carName.toLowerCase() == carName.toLowerCase() || carList[i].address == carName) {
       peripheral = peripheralList[i];
       carList[i].connectState = "disconnected";
       carList[i].sdkOn = false;
@@ -267,7 +267,7 @@ var connectCar = function(carName) {
   var peripheral = null;
   // See if we are already connected.
   for(var i=0; i<carList.length;i++) {
-    if(carList[i].carName == carName || carList[i].address == carName) {
+    if(carList[i].carName.toLowerCase() == carName.toLowerCase() || carList[i].address == carName) {
       peripheral = peripheralList[i];
     }
   }
@@ -324,7 +324,7 @@ var connectCar = function(carName) {
                 console.log("Connnect Writer Size After: "+readerCharacteristicList.length)
               }
               for(var j=0; j<carList.length;j++) {
-                if(carList[j].carName == carName || carList[j].address == carName) {
+                if(carList[j].carName.toLowerCase() == carName.toLowerCase() || carList[j].address == carName) {
                   carList[j].connectState = "connected";
                 }
               }
@@ -350,7 +350,7 @@ function getReaderCharacteristic(carName) {
       //console.log("Reader char length: "+readerCharacteristicList.length);
       for(var i=0; i<readerCharacteristicList.length;i++) {
         //console.log("Trying to find reader '"+readerCharacteristicList[i].carName+"' =? '"+carName+"'");
-        if(readerCharacteristicList[i].carName == carName) {
+        if(readerCharacteristicList[i].carName.toLowerCase() == carName.toLowerCase()) {
           //console.log("found reader right away "+i);
           readerCharacteristic = readerCharacteristicList[i].characteristic;
           resolve(readerCharacteristic);
@@ -363,7 +363,7 @@ function getReaderCharacteristic(carName) {
     connectCar(carName).then(function(res){
       console.log("In connectCar 'then'");
       for(var i=0; i<readerCharacteristicList.length;i++) {
-        if(readerCharacteristicList[i].carName == carName) {
+        if(readerCharacteristicList[i].carName.toLowerCase() == carName.toLowerCase()) {
           //console.log("found reader after connect "+i);
           readerCharacteristic = readerCharacteristicList[i].characteristic;
           resolve(readerCharacteristic);
@@ -394,11 +394,11 @@ function getWriterCharacteristic(carName) {
       }
       // One must not exist, try once to create one.
       console.log("Writer Car not connected");
-      connectCar(carName).then(function(res){
+      connectCar(carName.toLowerCase()).then(function(res){
         console.log("Inside connectCar try...");
         // Try again after connect.
         for(var i=0; i<writerCharacteristicList.length;i++) {
-          if(writerCharacteristicList[i].carName == carName) {
+          if(writerCharacteristicList[i].carName.toLowerCase() == carName.toLowerCase()) {
             writerCharacteristic = writerCharacteristicList[i].characteristic;
             resolve(writerCharacteristic);
             return;
@@ -422,7 +422,7 @@ var setLights = function(carName,lightValue) {
                                           // E.g. 0x44 ('set' 'headlights')
 
   console.log("set lights: Getting writer char");
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     if(writerCharacteristic != null) {
       console.log("Turn on lights");
       writerCharacteristic.write(lightMessage, false, function(err) {
@@ -482,7 +482,7 @@ var setEngineLight = function(carName,red,green,blue) {
   lightsPatternMessage.writeUInt8(0x00,17);
 
   console.log("set engine lights: ",lightsPatternMessage);
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
       console.log("Turn on lights");
       writerCharacteristic.write(lightsPatternMessage, false, function(err) {
         if(err) {
@@ -506,7 +506,7 @@ var turn = function(carName,turnType) {
   turnMessage.writeUInt8(0x01, 3); // TRIGGER (VEHICLE_TURN_TRIGGER_IMMEDIATE, VEHICLE_TURN_TRIGGER_INTERSECTION)
                                     //         (                             0,                                 1)
 
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     if(writerCharacteristic != null) {
       console.log("U-Turn");
       writerCharacteristic.write(turnMessage, false, function(err) {
@@ -525,7 +525,7 @@ var turn = function(carName,turnType) {
 // 0x0a 0x00 0x04 0x00 0x12 0x0b 0x00 0x06 0x24 0x54 0x01 0xe8 0x03 0x00 0x3b 0xbc 0xa1
 //////////////////////////////////////////////////////////
 var setSpeed = function(carName,speed) {
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     var speedMessage = new Buffer(7);
     speedMessage.writeUInt8(0x06, 0);
     speedMessage.writeUInt8(0x24, 1);
@@ -552,7 +552,7 @@ var changeLanes = function(carName,change) {
 
   // Step 1. anki_vehicle_msg_set_offset_from_road_center
   //
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     var changeMessage = new Buffer(12);
     changeMessage.writeUInt8(11, 0); // ANKI_VEHICLE_MSG_C2V_CHANGE_LANE_SIZE
     changeMessage.writeUInt8(0x25, 1); // ANKI_VEHICLE_MSG_C2V_CHANGE_LANE
@@ -577,7 +577,7 @@ var changeLanes = function(carName,change) {
 var batteryLevel = function(carName) {
   var batteryPromise = new Promise(
     function(resolve, reject) {
-      getReaderCharacteristic(carName).then(function(readerCharacteristic) {
+      getReaderCharacteristic(carName.toLowerCase()).then(function(readerCharacteristic) {
         async.parallel([
           function(callback) {  // Turn on reader notifications
             readerCharacteristic.notify(true, function(err) {
@@ -611,7 +611,7 @@ var batteryLevel = function(carName) {
             message = new Buffer(2);
             message.writeUInt8(0x01, 0);
             message.writeUInt8(0x1a, 1); // ANKI_VEHICLE_MSG_C2V_BATTERY_LEVEL_REQUEST
-            getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+            getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
               writerCharacteristic.write(message, false, function(err) {
                 if(err) {
                   console.log("Error: "+util.inspect(err, false,null));
@@ -638,7 +638,7 @@ var batteryLevel = function(carName) {
 // Request to report battery level - Reponse will go into standard log
 //////////////////////////////////////////////////////////
 var requestBatteryLevel = function(carName) {
-  getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+  getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
     message = new Buffer(2);
     message.writeUInt8(0x01, 0);
     message.writeUInt8(0x1a, 1); // ANKI_VEHICLE_MSG_C2V_BATTERY_LEVEL_REQUEST
@@ -659,7 +659,7 @@ var requestBatteryLevel = function(carName) {
 var ping = function(carName) {
   var pingPromise = new Promise(
     function(resolve, reject) {
-      getReaderCharacteristic(carName).then(function(readerCharacteristic) {
+      getReaderCharacteristic(carName.toLowerCase()).then(function(readerCharacteristic) {
         async.parallel([
           function(callback) {  // Turn on reader notifications
             console.log("set notify true");
@@ -686,7 +686,7 @@ var ping = function(carName) {
             message = new Buffer(2);
             message.writeUInt8(0x01, 0);
             message.writeUInt8(0x16, 1); // ANKI_VEHICLE_MSG_C2V_PING_REQUEST
-            getWriterCharacteristic(carName).then(function(writerCharacteristic) {
+            getWriterCharacteristic(carName.toLowerCase()).then(function(writerCharacteristic) {
               writerCharacteristic.write(message, false, function(err) {
                 if(err) {
                   console.log("Error: "+util.inspect(err, false,null));
@@ -712,7 +712,7 @@ var ping = function(carName) {
 // Track Count Travel.  Makes a car travel 'x' number of tracks, then stops.
 //////////////////////////////////////////////////////////
 var trackCountTravel = function(carName,tracksToTravel,speed) {
-  getReaderCharacteristic(carName).then(function(readerCharacteristic){
+  getReaderCharacteristic(carName.toLowerCase()).then(function(readerCharacteristic){
     console.log("in then after getting a reader...");
     if(readerCharacteristic == null) {
       return("Unable to find and connect to car "+carName);
@@ -745,14 +745,14 @@ var trackCountTravel = function(carName,tracksToTravel,speed) {
       },
       function(callback) { // Write the request to start the car traveling
         console.log("Starting car...");
-        writerCharacteristic = getWriterCharacteristic(carName);
+        writerCharacteristic = getWriterCharacteristic(carName.toLowerCase());
         setSpeed(carName,speed);
         callback();
       }],
       function(err) { /// Done... build reply
         console.log("Final call.  Stop car");
         console.log("Starting car...");
-        writerCharacteristic = getWriterCharacteristic(carName);
+        writerCharacteristic = getWriterCharacteristic(carName.toLowerCase());
         setSpeed(carName,0);
         disconnectCar(carName);
       }
@@ -764,7 +764,7 @@ var trackCountTravel = function(carName,tracksToTravel,speed) {
 // Track Count Travel.  Makes a car travel 'x' number of tracks, then stops.
 //////////////////////////////////////////////////////////
 var driveCar = function(carName,path) {
-  getReaderCharacteristic(carName).then(function(readerCharacteristic){
+  getReaderCharacteristic(carName.toLowerCase()).then(function(readerCharacteristic){
     console.log("in then after getting a reader...");
     if(readerCharacteristic == null) {
       return("Unable to find and connect to car "+carName);
@@ -819,14 +819,14 @@ trackCount=0;
       },
       function(callback) { // Write the request to start the car traveling
         console.log("Starting car...");
-        writerCharacteristic = getWriterCharacteristic(carName);
+        writerCharacteristic = getWriterCharacteristic(carName.toLowerCase());
         setSpeed(carName,500); // Start the car waiting for the starting track to be found.
         callback();
       }],
       function(err) { /// Done... build reply
         console.log("Final call.  Stop car");
         console.log("Starting car...");
-        writerCharacteristic = getWriterCharacteristic(carName);
+        writerCharacteristic = getWriterCharacteristic(carName.toLowerCase());
         setSpeed(carName,0);
       }
     );
@@ -837,7 +837,7 @@ var mapTrack = function(carName,trackMap) {
   console.log("Map Track Start...");
   trackMap.resetTrackMap();
   //rescan(); // try to make sure we can see the car
-  getReaderCharacteristic(carName).then(function(readerCharacteristic){
+  getReaderCharacteristic(carName.toLowerCase()).then(function(readerCharacteristic){
     if(readerCharacteristic == null) {
       return("Unable to find and connect to car "+carName);
     }
@@ -889,14 +889,14 @@ var mapTrack = function(carName,trackMap) {
       },
       function(callback) { // Write the request to start the car traveling
         console.log("Starting car for mapping: "+carName);
-        writerCharacteristic = getWriterCharacteristic(carName);
+        writerCharacteristic = getWriterCharacteristic(carName.toLowerCase());
         setSpeed(carName,500);
         callback();
       }],
       function(err) { /// Done... build reply
         console.log("Final call.  Stop car.  Mapping done.");
         console.log("Starting car...");
-        writerCharacteristic = getWriterCharacteristic(carName);
+        writerCharacteristic = getWriterCharacteristic(carName.toLowerCase());
         setSpeed(carName,0);
       }
     );

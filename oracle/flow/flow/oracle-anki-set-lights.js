@@ -67,7 +67,7 @@ exports.install = function(instance) {
     var onoff = instance.options.onoff;
     if(response.repository !== undefined && response.repository.onoff !== undefined) {
       onoff = false;
-      if(response.repository.lightname.toLowerCase() === "on") { onoff = true; }
+      if(response.repository.onoff.toLowerCase() === "on") { onoff = true; } else { onoff = false; }
     }
 
     var finalUrl = "http://localhost:7801/";
