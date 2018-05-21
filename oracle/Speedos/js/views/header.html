@@ -1,0 +1,17 @@
+<!--
+ Copyright (c) 2014, 2016, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<!--
+   ** Oracle JET V1.1 header template uses oj-flex-bar style classes to layout header content.
+   ** Contains three main areas: appname/logo, global navigation, and application navigation.
+   ** Please see the Oracle JET website under the Cookbook/Application Patterns section for details on how to use this pattern
+-->
+<div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
+
+  <div data-bind="css: smScreen() ? 'oj-flex-bar-center-absolute' : 'oj-flex-bar-middle oj-sm-align-items-baseline'">
+    <span role="img" class="oj-sm-only-hide oj-icon demo-oracle-icon" title="Oracle Logo" alt="Oracle Logo"></span>
+    <span class="oj-web-applayout-header-title" title="Application Name" data-bind="text: appName"></span>
+  </div>
+  </div>
+</div>

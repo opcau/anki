@@ -1,0 +1,164 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
+var util = require('util')
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+var WebSocketServer = require('ws').Server 
+var clientConnection = new Array();
+
+// Create an instance of websocket server.
+var wss = new WebSocketServer({host: '0.0.0.0',port: 8001});
+console.log('New server created, waiting for connections...');
+
+// Add the connection listener that will be triggered once the connection is established.
+wss.on('connection', function(ws) {
+  console.log('Server was connected.');
+  clientConnection.push(ws);
+    //  Add the listener for that particular websocket connection instance.
+    ws.on('message', function(message) {
+        console.log('Server received message: %s', message);
+        // Send back the message that we receive from the browser
+        ws.send(message);
+    });  
+});
+
+app.post('/setspeed', function (req, res) {
+  var groupid = req.body.groupid
+  var deviceid = req.body.deviceid
+  var datetime = req.body.datetime
+  var carid = req.body.carid
+  var carname = req.body.carname
+  var speed = req.body.speed
+  console.log("Sending speed to "+groupid+" : "+clientConnection.length+" clients");
+  var numClients = clientConnection.length;
+  var newClientConnection = clientConnection.slice(0);
+  for(var i=0;i<numClients;i++) {
+    console.log("Sending to client "+i);
+    try {
+      clientConnection[i].send(JSON.stringify({'message':'speed','groupid':groupid,'deviceid':deviceid,'carid':carid,'carname':carname,'speed': speed}));
+    } catch (ex) {
+      console.log("error sending.  Removing client: "+ex);
+      newClientConnection.splice(i,1);
+    }
+  }
+  clientConnection=newClientConnection.slice(0);
+  res.end("Success");
+});
+
+app.post('/offtrack', function (req, res) {
+  var groupid = req.body.groupid;
+  var deviceid = req.body.deviceid;
+  var datetime = req.body.datetime;
+  var carid = req.body.carid;
+  var carname = req.body.carname;
+  var eventname = req.body.eventname;
+  var trackid = req.body.trackid;
+  console.log("Sending offtrack to "+clientConnection.length+" clients");
+  var numClients = clientConnection.length;
+  var newClientConnection = clientConnection.slice(0);
+  for(var i=0;i<numClients;i++) {
+    try {
+      clientConnection[i].send(JSON.stringify({'message':'offtrack','groupid':groupid,'deviceid':deviceid,'carid':carid,'carname':carname}));
+    } catch (ex) {
+      console.log("error sending.  Removing client: "+ex);
+      newClientConnection.splice(i,1);
+    }
+  }
+  clientConnection=newClientConnection.slice(0);
+  res.end("Success");
+});
+
+app.post('/lap', function (req, res) {
+  var groupid = req.body.groupid;
+  var deviceid = req.body.deviceid;
+  var datetime = req.body.datetime;
+  var carid = req.body.carid;
+  var carname = req.body.carname;
+  var lapnumber = req.body.lapnumber;
+  var laptime = req.body.laptime;
+  var trackcount = req.body.trackcount;
+  console.log("Sending lap to ["+groupid+"]"+clientConnection.length+" clients");
+  var numClients = clientConnection.length;
+  var newClientConnection = clientConnection.slice(0);
+  for(var i=0;i<numClients;i++) {
+    try {
+      clientConnection[i].send(JSON.stringify({'message':'lap','groupid':groupid,'deviceid':deviceid,'datetime':datetime,'carid':carid,'carname':carname,'lapnumber':lapnumber,'laptime':laptime,'trackcount':trackcount}));
+    } catch (ex) {
+      console.log("error sending.  Removing client: "+ex);
+      newClientConnection.splice(i,1);
+    }
+  }
+  clientConnection=newClientConnection.slice(0);
+  res.end("Success");
+});
+
+app.post('/battery', function (req, res) {
+  console.log("Battery event.");
+  var groupid = req.body.groupid;
+  var deviceid = req.body.deviceid;
+  var datetime = req.body.datetime;
+  var carid = req.body.carid;
+  var carname = req.body.carname;
+  var batterylevel = req.body.batterylevel;
+  res.end("Success");
+});
+
+app.post('/track', function (req, res) {
+  console.log("Track event.");
+  var groupid = req.body.groupid;
+  var deviceid = req.body.deviceid;
+  var datetime = req.body.datetime;
+  var carid = req.body.carid;
+  var carname = req.body.carname;
+  var fromtrackid = req.body.fromtrackid;
+  var totrackid = req.body.totrackid;
+  var trackstyle = req.body.trackstyle;
+  var trackid = req.body.trackid;
+  res.end("Success");
+});
+
+app.post('/startrace', function (req, res) {
+  var groupid = req.body.groupid
+  console.log("Group id at call: "+groupid);
+  var deviceid = req.body.deviceid
+  var datetime = req.body.datetime
+  var carname1 = req.body.carname1
+  var carid1 = req.body.carid1
+  var carname2 = req.body.carname2
+  var carid2 = req.body.carid2
+  var carname3 = req.body.carname3
+  var carid3 = req.body.carid3
+  var carname4 = req.body.carname4
+  var carid4 = req.body.carid4
+  console.log("Sending startrace to "+groupid+" : "+clientConnection.length+" clients");
+  var numClients = clientConnection.length;
+  var newClientConnection = clientConnection.slice(0);
+  var x=JSON.stringify({ 'groupid':groupid });
+  console.log("X: "+x);
+  for(var i=0;i<numClients;i++) {
+    console.log("Sending to client "+i);
+    try {
+      clientConnection[i].send(JSON.stringify({'message':'startrace',
+         'groupid':groupid, 'deviceid':deviceid,'datetime':datetime,
+         'carname1':carname1,'carid1':carid1,
+         'carname2':carname2,'carid2':carid2,
+         'carname3':carname3,'carid3':carid3,
+         'carname4':carname4,'carid4':carid4}));
+    } catch (ex) {
+      console.log("error sending.  Removing client: "+ex);
+      newClientConnection.splice(i,1);
+    }
+  }
+  clientConnection=newClientConnection.slice(0);
+  res.end("Success");
+});
+
+app.use('/', express.static('.'));
+
+
+var server = app.listen(8002, function () {
+  console.log("App listening at http://:8002");
+});
+

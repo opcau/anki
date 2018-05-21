@@ -1,0 +1,14 @@
+<!--
+
+-->
+<center>
+<img id="carImage" width=150 data-bind="attr: {src: carImage()}"/>
+</center> 
+
+    <div id="carSpeedo" data-bind="canvasspeedo: 'carSpeedo'"></div><br/>
+
+<div id="offtrack" style="background-color: red; opacity: 0; width: 100%; height: 100%; position: absolute; top:0; left:0; z-index:10;"></div>
+<img id="offtrackimage" src="/images/offtrack.png" style="opacity: 0; position: absolute;z-index:11; top:300px;left:50%;transform: translateX(-50%) translateY(-50%);"/>
+<img id="leaderimage" src="/images/firstplace.png" style="opacity: 0; position: absolute;z-index:11; top:100px;left:75%;transform: translateX(-50%) translateY(-50%);"/>
+<img id="bestlap" src="/images/bestlap.png" style="opacity: 0; position: absolute;z-index:11; bottom:20px;left:20px;"/>
+<div id="bestlaptime" style="opacity: 0; position: absolute;z-index:11; bottom:45px;left:68px;font-family:new century schoolbook;font-size: 22px;">2.333</div>

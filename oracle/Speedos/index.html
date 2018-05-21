@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+ Copyright (c) 2014, 2016, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+
+<!-- ************************ IMPORTANT INFORMATION ************************************
+     This file and Quick Start project are provided as an example of how to configure a JET application.
+     It contains the Oracle JET framework and a default requireJS configuration file to show how JET can be setup
+     in a common application. This project template can be used in conjunction with demo code from the JET website
+     to test JET component behavior and interactions.
+
+     Any CSS styling with the prefix "demo-" is for demonstration only and is not provided as part of the JET framework.
+
+     Aria Landmark role attributes are added to the different sections of the application for accessibility compliance.
+     If you change the type of content for a specific section from what is defined, you should also change the
+     role value for that section to represent the appropriate content type.
+     ***************************** IMPORTANT INFORMATION ************************************ -->
+
+<html lang="en-us">
+  <head>
+    <title>Anki Speedometers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/libs/oj/v2.0.1/alta/oj-alta-min.css" type="text/css"/>
+    <link rel="stylesheet" href="css/override.css" type="text/css"/>
+    <script data-main="js/main" src="js/libs/require/require.js"></script>
+    <script src="js/websocket.js"></script>
+  </head>
+  <body>
+
+    <div id="globalBody" class="oj-web-applayout-offcanvas-wrapper oj-offcanvas-outer-wrapper">
+      <div class="oj-offcanvas-inner-wrapper">
+        <!--
+        ** This off-canvas section is used when the browser is resized to a
+        ** medium or smaller media query size. It moves the App Navigation into a drawer
+        -->
+        <div class="oj-web-applayout-scrollable-wrapper">
+          <div class="oj-web-applayout-scrollable oj-web-applayout-page">
+            <!-- Header section which contains the Global Branding, Global Navigation,
+            ** and Application Navigation code. Template is located in /js/views/header.html
+            -->
+            <header role="banner" class="oj-web-applayout-header"
+              data-bind="ojModule: 'header'"></header>
+            <!-- This is where your main page content will be loaded -->
+    <div id="panelPage">
+      <div id="carControls" class="oj-flex">
+        <div class="oj-panel oj-panel-shadow-md" id="0Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '0'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="1Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '1'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="2Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '2'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="3Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '3'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="4Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '4'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="5Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '5'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="6Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '6'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="7Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '7'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="8Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '8'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="9Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '9'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="10Controls" style="display:none; width:25%;">
+            <div data-bind="ojModule: {name: 'car', params: '10'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="11Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '11'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="12Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '12'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="13Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '13'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="14Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '14'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="15Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '15'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="16Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '16'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="17Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '17'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="18Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '18'}"></div>
+        </div>
+        <div class="oj-panel oj-panel-shadow-md" id="19Controls" style="display:none; width:25%;">
+          <div data-bind="ojModule: {name: 'car', params: '19'}"></div>
+        </div>
+      </div>
+    </div>
+            <div class="oj-panel oj-panel-shadow-md"
+              data-bind="ojModule: 'laps'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
