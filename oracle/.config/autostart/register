@@ -1,0 +1,49 @@
+#!/bin/bash
+export myip=$(hostname -I|xargs)
+DevId=`cat /proc/cpuinfo | grep Serial | awk -F": " '{ print $2 }'`
+
+DeviceType="PIDRIVE"
+homedir="/home/oracle"
+. ${homedir}/Desktop/RegInfo.txt
+
+echo ${DevId} > ${homedir}/DevId.txt
+chmod 644 ${homedir}/DevId.txt
+echo "ID: ${DevId}"
+SwVersion=`cat ${homedir}/SwVersion.txt`
+
+echo "GroupID: $GroupID"
+echo "DevId: $DevId"
+echo "Name: $Name"
+echo "Description: $Description"
+echo "DeviceType: ${DeviceType}"
+echo "Region $Region"
+echo "City $City"
+echo "Email $ContactEmail"
+echo "SwVersion $SwVersion"
+echo "MyIP $myip"
+curl -v --insecure -X POST -H "city: ${City}" -H "desc: ${Description}" -H "devicetype: ${DeviceType}" -H "devid: ${DevId}" -H "groupid: ${GroupID}" -H "name: ${Name}" -H "region: ${Region}" -H "swversion: ${SwVersion}" -H "email: ${ContactEmail}" -H "hostip: ${myip}" "https://sharedb.opcau.com/apex/pdb1/anziot/v6_anki/register/"
+
+export GroupIDEsc=$( echo "$GroupID" | sed 's/ /%20/g' )
+portMinorNumber=`curl --insecure -s "https://sharedb.opcau.com/apex/pdb1/anziot/v6_anki/devicePort/${GroupIDEsc}" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["items"][0]["port"]'`
+echo "Port Number: ${portMinorNumber}"
+basePort="${portMinorNumber}"
+echo "${basePort}" > ${homedir}/basePort.txt
+
+helicopterPort="77${portMinorNumber}"
+echo "${helicopterPort}" > ${homedir}/heliPort.txt
+
+drivePort="78${portMinorNumber}"
+echo "${drivePort}" > ${homedir}/drivePort.txt
+
+driveUiPort="79${portMinorNumber}"
+echo "${driveUiPort}" > ${homedir}/driveUiPort.txt
+
+sshPort="22${portMinorNumber}"
+echo "${sshPort}" > ${homedir}/sshPort.txt
+
+if [ -e "/home/oracle" ]
+then
+  chown oracle:oracle ${homedir}/*.txt
+else
+  chown pi:pi ${homedir}/*.txt
+fi
