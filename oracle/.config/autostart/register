@@ -1,5 +1,14 @@
 #!/bin/bash
 export myip=$(hostname -I|xargs)
+
+while [[ ${myip} == "" ]]
+do
+echo "in while loop" >> /tmp/register.log
+  sleep 10
+  export myip=$(hostname -I|xargs)
+done 
+
+echo "Running register ${myip}." > /tmp/register.log
 DevId=`cat /proc/cpuinfo | grep Serial | awk -F": " '{ print $2 }'`
 
 DeviceType="PIDRIVE"
