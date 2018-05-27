@@ -46,7 +46,11 @@ exports.html = `<div class="padding">
   </div>
 </div>
 <script>
+var currentCarName;
 ON('save.oracleankievents', function(component, options) {
+  if(component.name === undefined) {
+    component.name = "Events";
+  }
   if(component.color == undefined) {
     switch(component.options.carname) {
       case "Skull": component.color = "#FD5134"; break;
@@ -60,7 +64,36 @@ ON('save.oracleankievents', function(component, options) {
       case "X52 Ice": component.color = "#F0F0FF"; break;
       case "Free Wheel": component.color = "#A2C84E"; break;
     }
+  } else {
+    if(component.options.carname !== currentCarName) { // car name changed
+      if(component.color === "#FD5134" ||
+         component.color === "#903427" ||
+         component.color === "#23BBC7" ||
+         component.color === "#1C2D7C" ||
+         component.color === "#6d7563" ||
+         component.color === "#9cE667" ||
+         component.color === "#FDFDFD" ||
+         component.color === "#DF2a32" ||
+         component.color === "#F0F0FF" ||
+         component.color === "#A2C84E") {
+        switch(component.options.carname) {
+          case "Skull": component.color = "#FD5134"; break;
+          case "Thermo": component.color = "#903427"; break;
+          case "Guardian": component.color = "#23BBC7"; break;
+          case "Ground Shock": component.color = "#1C2D7C"; break;
+          case "Big Bang": component.color = "#6d7563"; break;
+          case "Nuke": component.color = "#9cE667"; break;
+          case "Nuke Ice": component.color = "#FDFDFD"; break;
+          case "X52": component.color = "#DF2a32"; break;
+          case "X52 Ice": component.color = "#F0F0FF"; break;
+          case "Free Wheel": component.color = "#A2C84E"; break;
+        }
+      }
+    }
   }
+});
+ON('open.oracleankievents', function(component, options) {
+  currentCarName = options.carname;
 });
 </script>`;
 
@@ -113,6 +146,7 @@ exports.install = function(instance) {
       eventlist = "All";
     }
     socketUrl = socketUrl + "&events="+eventlist;
+    instance.status("Listening");
 
     const WebSocket = require('html5-websocket');
     const ReconnectingWebSocket = require('reconnecting-websocket');
@@ -120,6 +154,7 @@ exports.install = function(instance) {
     instance.websocket = new ReconnectingWebSocket(socketUrl,[],{ constructor: WebSocket });
     instance.websocket.onmessage = function(evt) {
       var jsondata = JSON.parse(evt.data);
+      instance.status("Event: "+jsondata.carname+"-"+jsondata.eventtype);
       instance.send2(jsondata);
     };
   };
