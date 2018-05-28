@@ -1,22 +1,12 @@
 #!/bin/bash
 
 basePort=`cat /home/oracle/basePort.txt`
-echo "Base PortNumber: ${basePort}"
+echo "Base PortNumber: ${basePort}" >> /home/oracle/sshTunnel.log
 
-# Not used for VM.
-helicopterPort=`cat /home/oracle/heliPort.txt`
-echo "Helicopter PortNumber: ${helicopterPort}"
+sshPort="22${basePort}"
+echo "SSH PortNumber: ${sshPort}" >> /home/oracle/sshTunnel.log
 
-drivePort=`cat /home/oracle/drivePort.txt`
-echo "Drive PortNumber: ${drivePort}"
+autosshBasePort="20${basePort}"
+autosshEchoPort="21${basePort}"
 
-driveUiPort=`cat /home/oracle/driveUiPort.txt`
-echo "Drive UI PortNumber: ${driveUiPort}"
-
-sshPort=`cat /home/oracle/sshPort.txt`
-echo "SSH PortNumber: ${sshPort}"
-
-autosshBasePort="20${basePort}0"
-autosshEchoPort="20${basePort}1"
-
-autossh -M ${autosshBasePort}:${autosshEchoPort} -q -f -N -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -R [::]:${drivePort}:localhost:7877 -R [::]:${driveUiPort}:localhost:7901 -R [::]:${sshPort}:localhost:22 iot@ankiot.opcau.com >> /home/oracle/sshTunnel.log
+autossh -M ${autosshBasePort}:${autosshEchoPort} -q -N -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -R [::]:${sshPort}:localhost:22 ports@streams.opcau.com >> /home/oracle/sshTunnel.log

@@ -8,7 +8,8 @@ echo "in while loop" >> /tmp/register.log
   export myip=$(hostname -I|xargs)
 done 
 
-echo "Running register ${myip}." > /tmp/register.log
+date >> /tmp/register.log
+echo "Running register ${myip}." >> /tmp/register.log
 DevId=`cat /proc/cpuinfo | grep Serial | awk -F": " '{ print $2 }'`
 
 DeviceType="PIDRIVE"
@@ -37,22 +38,3 @@ portMinorNumber=`curl --insecure -s "https://sharedb.opcau.com/apex/pdb1/anziot/
 echo "Port Number: ${portMinorNumber}"
 basePort="${portMinorNumber}"
 echo "${basePort}" > ${homedir}/basePort.txt
-
-helicopterPort="77${portMinorNumber}"
-echo "${helicopterPort}" > ${homedir}/heliPort.txt
-
-drivePort="78${portMinorNumber}"
-echo "${drivePort}" > ${homedir}/drivePort.txt
-
-driveUiPort="79${portMinorNumber}"
-echo "${driveUiPort}" > ${homedir}/driveUiPort.txt
-
-sshPort="22${portMinorNumber}"
-echo "${sshPort}" > ${homedir}/sshPort.txt
-
-if [ -e "/home/oracle" ]
-then
-  chown oracle:oracle ${homedir}/*.txt
-else
-  chown pi:pi ${homedir}/*.txt
-fi

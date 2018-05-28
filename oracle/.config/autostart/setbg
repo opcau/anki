@@ -3,7 +3,6 @@ export _IP=$(hostname -I|xargs)
 
 while [[ ${_IP} == "" ]]
 do
-echo "in while loop" >> /tmp/jrg.txt
   sleep 10
   export _IP=$(hostname -I|xargs)
 done 

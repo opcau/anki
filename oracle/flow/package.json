@@ -4,7 +4,6 @@
 	"version": "1.0.0",
 	"main": "debug.js",
 	"dependencies": {
-		"ask-sdk": "^2.0.5",
 		"html5-websocket": "^2.0.2",
 		"mosca": "^2.8.1",
 		"mqtt": "^2.18.0",
@@ -12,8 +11,7 @@
 		"pm2": "^2.10.3",
 		"reconnecting-websocket": "^3.2.2",
 		"ssml-builder": "^0.4.3",
-		"total.js": "latest",
-		"ws": "^5.1.1"
+		"total.js": "latest"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
