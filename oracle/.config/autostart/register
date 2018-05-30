@@ -38,3 +38,7 @@ portMinorNumber=`curl --insecure -s "https://sharedb.opcau.com/apex/pdb1/anziot/
 echo "Port Number: ${portMinorNumber}"
 basePort="${portMinorNumber}"
 echo "${basePort}" > ${homedir}/basePort.txt
+
+# Update git
+cd /home
+git pull >> /tmp/git.log

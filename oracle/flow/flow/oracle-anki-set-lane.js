@@ -113,11 +113,11 @@ exports.install = function(instance) {
       if(response.repository !== undefined && response.repository.lane !== undefined) { lane = response.repository.lane; }
 
       var lanevalue = 0;
-      switch(lane) {
-        case "Left": lanevalue = -68; break;
-        case "Left Middle": lanevalue = -24; break;
-        case "Right Middle": lanevalue = 24; break;
-        case "Right": lanevalue = 68; break;
+      switch(lane.toLowerCase()) {
+        case "left": lanevalue = -68; break;
+        case "left middle": lanevalue = -24; break;
+        case "right middle": lanevalue = 24; break;
+        case "right": lanevalue = 68; break;
         default : lanevalue = 24; break;
       }
     }
