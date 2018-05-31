@@ -1,5 +1,7 @@
 #!/bin/bash
-export myip=$(hostname -I|xargs)
+export iplist=$(hostname -I|xargs)
+iparray=($iplist)
+export myip=${iparray[0]}
 
 while [[ ${myip} == "" ]]
 do
