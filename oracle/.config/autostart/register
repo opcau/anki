@@ -10,9 +10,17 @@ done
 
 date >> /tmp/register.log
 echo "Running register ${myip}." >> /tmp/register.log
-DevId=`cat /proc/cpuinfo | grep Serial | awk -F": " '{ print $2 }'`
 
-DeviceType="PIDRIVE"
+# Check to see if we are on a Pi or a VM
+CPUTYPE=`uname -m`
+if [[ $CPUTYPE == "armv7l" ]];
+then
+  DevId=`cat /proc/cpuinfo | grep Serial | awk -F": " '{ print $2 }'`
+  DeviceType="PI"
+else
+  DevId=`sudo dmidecode -t system | grep UUID | sed 's/.*UUID://;s/ //g'`
+  DeviceType="VM"
+fi
 homedir="/home/oracle"
 . ${homedir}/Desktop/RegInfo.txt
 
