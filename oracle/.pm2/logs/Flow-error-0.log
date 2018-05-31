@@ -1,0 +1,195 @@
+TypeError: Cannot read property 'message' of null
+    at Object.callback (/home/oracle/flow/flow/oracle-anki-set-speed.js:93:28)
+    at IncomingMessage.<anonymous> (/home/oracle/flow/node_modules/total.js/utils.js:778:12)
+    at IncomingMessage.emit (events.js:185:15)
+    at IncomingMessage.emit (domain.js:422:20)
+    at endReadableNT (_stream_readable.js:1106:12)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+TypeError: Cannot read property 'length' of undefined
+    at Component.send (/home/oracle/flow/tmp/flow.package/index.js:792:11)
+    at Component.throw (/home/oracle/flow/tmp/flow.package/index.js:1052:14)
+    at Component.error (/home/oracle/flow/tmp/flow.package/index.js:952:12)
+    at Component.instance.reconfigure (/home/oracle/flow/flow/code.js:81:13)
+    at Component.exports.install (/home/oracle/flow/flow/code.js:86:11)
+    at /home/oracle/flow/tmp/flow.package/index.js:1313:19
+    at Object.FLOW.reset (/home/oracle/flow/tmp/flow.package/index.js:1219:22)
+    at Object.FLOW.init (/home/oracle/flow/tmp/flow.package/index.js:1275:7)
+    at Object.FLOW.save (/home/oracle/flow/tmp/flow.package/index.js:1428:38)
+    at WebSocket.<anonymous> (/home/oracle/flow/tmp/flow.package/index.js:512:9)
+TypeError: Cannot read property 'forEach' of undefined
+    at /home/oracle/flow/tmp/flow.package/index.js:1461:18
+    at Object.FLOW.reset (/home/oracle/flow/tmp/flow.package/index.js:1303:22)
+    at Object.FLOW.init_component (/home/oracle/flow/tmp/flow.package/index.js:1459:7)
+    at exec (/home/oracle/flow/tmp/flow.package/index.js:1185:9)
+    at Object.FLOW.register (/home/oracle/flow/tmp/flow.package/index.js:1193:3)
+    at Object.FLOW.execute (/home/oracle/flow/tmp/flow.package/index.js:1623:7)
+    at WriteStream.<anonymous> (/home/oracle/flow/tmp/flow.package/index.js:1852:10)
+    at WriteStream.emit (events.js:185:15)
+    at WriteStream.emit (domain.js:422:20)
+    at finishMaybe (_stream_writable.js:636:14)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Server.setupListenHandle [as _listen2] (net.js:1346:14)
+    at listenInCluster (net.js:1387:12)
+    at doListen (net.js:1502:7)
+    at process._tickCallback (internal/process/next_tick.js:178:19)
+TypeError: Cannot read property 'forEach' of undefined
+    at /home/oracle/flow/tmp/flow.package/index.js:1461:18
+    at Object.FLOW.reset (/home/oracle/flow/tmp/flow.package/index.js:1303:22)
+    at Object.FLOW.init_component (/home/oracle/flow/tmp/flow.package/index.js:1459:7)
+    at exec (/home/oracle/flow/tmp/flow.package/index.js:1185:9)
+    at Array.wait.Array.waitFor (/home/oracle/flow/node_modules/total.js/utils.js:4556:16)
+    at Immediate.next_wait (/home/oracle/flow/node_modules/total.js/utils.js:4576:7)
+    at runCallback (timers.js:764:11)
+    at tryOnImmediate (timers.js:734:5)
+    at processImmediate (timers.js:716:5)
+    at process.topLevelDomainCallback (domain.js:102:23)
+/home/oracle/flow/flow/alexa-router.js:208
+								instance.sendReply(self,'<speak>I'm sorry, there is no help for this module.</speak>','<speak>Hello? Anyone there?</speak>',true);
+								                        ^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at new Script (vm.js:51:7)
+    at createScript (vm.js:136:10)
+    at Object.runInThisContext (vm.js:197:10)
+    at Module._compile (internal/modules/cjs/loader.js:618:28)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:665:10)
+    at Module.load (internal/modules/cjs/loader.js:566:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:506:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:498:3)
+    at Module.require (internal/modules/cjs/loader.js:598:17)
+    at require (internal/modules/cjs/helpers.js:11:18)
+/home/oracle/flow/flow/alexa-router.js:239
+								instance.sendReply(self,'<speak>I don't understand.</speak>','<speak>Hello? Anyone there?</speak>',false);
+								                        ^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at new Script (vm.js:51:7)
+    at createScript (vm.js:136:10)
+    at Object.runInThisContext (vm.js:197:10)
+    at Module._compile (internal/modules/cjs/loader.js:618:28)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:665:10)
+    at Module.load (internal/modules/cjs/loader.js:566:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:506:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:498:3)
+    at Module.require (internal/modules/cjs/loader.js:598:17)
+    at require (internal/modules/cjs/helpers.js:11:18)
+/home/oracle/flow/flow/alexa-router.js:239
+								instance.sendReply(self,'<speak>I don't understand.</speak>','<speak>Hello? Anyone there?</speak>',false);
+								                        ^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at new Script (vm.js:51:7)
+    at createScript (vm.js:136:10)
+    at Object.runInThisContext (vm.js:197:10)
+    at Module._compile (internal/modules/cjs/loader.js:618:28)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:665:10)
+    at Module.load (internal/modules/cjs/loader.js:566:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:506:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:498:3)
+    at Module.require (internal/modules/cjs/loader.js:598:17)
+    at require (internal/modules/cjs/helpers.js:11:18)
+/home/oracle/flow/flow/alexa-router.js:239
+								instance.sendReply(self,'<speak>I don't understand.</speak>','<speak>Hello? Anyone there?</speak>',false);
+								                        ^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at new Script (vm.js:51:7)
+    at createScript (vm.js:136:10)
+    at Object.runInThisContext (vm.js:197:10)
+    at Module._compile (internal/modules/cjs/loader.js:618:28)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:665:10)
+    at Module.load (internal/modules/cjs/loader.js:566:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:506:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:498:3)
+    at Module.require (internal/modules/cjs/loader.js:598:17)
+    at require (internal/modules/cjs/helpers.js:11:18)
+/home/oracle/flow/flow/alexa-router.js:239
+								instance.sendReply(self,'<speak>I don't understand.</speak>','<speak>Hello? Anyone there?</speak>',false);
+								                        ^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at new Script (vm.js:51:7)
+    at createScript (vm.js:136:10)
+    at Object.runInThisContext (vm.js:197:10)
+    at Module._compile (internal/modules/cjs/loader.js:618:28)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:665:10)
+    at Module.load (internal/modules/cjs/loader.js:566:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:506:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:498:3)
+    at Module.require (internal/modules/cjs/loader.js:598:17)
+    at require (internal/modules/cjs/helpers.js:11:18)
