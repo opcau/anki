@@ -6,7 +6,8 @@ var dateFormat = require('date-format');
 // Config
 //////////////////////////////////////////////////////////
 
-var sxServer = "streams.opcau.com";
+//var sxServer = "streams.opcau.com";
+var sxServer = "129.156.113.223";
 var sxPort = 9004;
 var sxServerUrl = "http://"+sxServer+":"+sxPort;
 var fs = require('fs');
@@ -196,7 +197,7 @@ module.exports = function() {
         }
         //console.log("Message[0x"+msgId.toString(16)+"][Position Update]: ",data," Location: ",trackLocation.toString(16)," id:(",trackId,") ",trackId.toString(16)," offset: ",offset," speed: "+speed+" clockwise: ",clockwise);
         if(trackId == 33) {
-          console.log("********** Start");
+          //console.log("********** Start");
           trackCount[carName] = 0;
           currentDirection=3; // west
           // If we see two start events without a finish event, we have to assume we missed the finish event and a lap has been made.
@@ -214,12 +215,11 @@ module.exports = function() {
             finishMissed = 0;
             startPassed =0 ;
           }
-          console.log("********** Finish");
+          //console.log("********** Finish");
           currentDirection=3; // west
           var now = new Date();
-          console.log("Old Time: "+lapTimes[carName]);
           if (lapTimes[carName] === undefined ) {
-            console.log("LapTime does not exist for car '"+carName+"'.");
+            //console.log("LapTime does not exist for car '"+carName+"'.");
             lapTimes[carName] = new Date();
             lapNumbers[carName] = 1;
           }
@@ -258,8 +258,6 @@ module.exports = function() {
               var newClientConnection = clientConnection.slice(0);
               for(var i=0;i<numClients;i++) {
                 if(clientConnection[i].events === "all" || clientConnection[i].events.indexOf('lap') > -1) {  // This client wants this event
-                  console.log("This client wants lap events."+i);
-                  console.log("Compare: "+clientConnection[i].cars+" =? "+displayName.toLowerCase());
                   if(clientConnection[i].cars === "all" || clientConnection[i].cars.indexOf(displayName.toLowerCase()) > -1) { // This client wants this car
                     try {
                       console.log("Sending lap to client: "+i);

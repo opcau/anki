@@ -10,6 +10,7 @@ exports.version = '1.0.0';
 exports.author = 'John Graves';
 exports.options = { carname: "All" };
 exports.cloning = false;
+exports.npm = [ 'colornames' ];
 
 exports.html = `<div class="padding">
   <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice">@(Car Name)</div>
@@ -123,13 +124,23 @@ exports.install = function(instance) {
     if( colour === "#4A89DC") { colour = "#0000FF"; } // Blue
     if( colour === "#967ADC") { colour = "#A020F0"; } // Purple
     if( colour === "#656D7D") { colour = "#555555"; } // Grey
+
+    if( colour.substr(0,1) !== "#") {
+      var toHex = require('colornames')
+      console.log("Convert color name to hex value: "+colour);
+      colour = toHex(colour);
+      console.log("after: "+colour);
+    }
+
     var rgb = instance.custom.hexToRgb(colour.toLowerCase());
     var red = Math.floor(rgb.r/16);
     var green = Math.floor(rgb.g/16);
     var blue = Math.floor(rgb.b/16);
 
     var carname = instance.options.carname;
+console.log("Car name from settings: "+carname);
     if(response.repository !== undefined && response.repository.carname !== undefined) { carname = response.repository.carname; }
+console.log("Car name from repository: "+carname);
 
     var finalUrl = "http://localhost:7801/setEngineLight/"+carname+"/"+red+"/"+green+"/"+blue;
     U.request(finalUrl, flags, null, function(err, data, status, headers, host) {
