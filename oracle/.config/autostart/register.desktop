@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=name
+Exec=/home/oracle/.config/autostart/register
+Type=Application
