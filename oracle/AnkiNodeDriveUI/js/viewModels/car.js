@@ -86,6 +86,7 @@ define(['ojs/ojcore', 'knockout','jquery','ojs/ojknockout','ojs/ojswitch','ojs/o
         var self = this;
         var firstLaneChange = true;
         postbox.subscribe(function(newValue) {
+            console.log("New value: "+newValue);
             self.carName(newValue);
             carNameLowercase = newValue.replace(/\s/g,"").toLowerCase()
             this.carImage("images/"+carNameLowercase+".png");
@@ -103,10 +104,8 @@ define(['ojs/ojcore', 'knockout','jquery','ojs/ojknockout','ojs/ojswitch','ojs/o
         postbox.subscribe(function(newValue) {
             if(newValue === "connected") {
                 self.connectCheckbox(true);
-                self.carImage("images/"+carNameLowercase+"Connected.png");
             } else {
                 self.connectCheckbox(false);
-                self.carImage("images/"+carNameLowercase+".png");
             }
         }, this, "carConnectChanged"+carNumberOrig);
         self.clickedButton = ko.observable("(None clicked yet)");
@@ -131,7 +130,6 @@ define(['ojs/ojcore', 'knockout','jquery','ojs/ojknockout','ojs/ojswitch','ojs/o
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send();
             self.connectCheckbox(true);
-            document.getElementById("carImage"+carNameOrig).setAttribute("src","images/"+carNameLowercase+"Connected.png");
           }
           
           if(event.currentTarget.id === "startButton") {
@@ -166,8 +164,6 @@ define(['ojs/ojcore', 'knockout','jquery','ojs/ojknockout','ojs/ojswitch','ojs/o
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send();
 
-            self.carImage("images/"+carNameLowercase+"Connected.png");
-            
             // Wait a second and then update the screen
             var timerVar = setInterval(function(){
                 //alert("Hello");

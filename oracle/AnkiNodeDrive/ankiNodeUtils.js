@@ -91,6 +91,12 @@ noble.on('discover', function(peripheral) {
         case 17: // Truck - X52 Ice
           var carName = "X52 Ice";
           break;
+        case 18: // Fast n Furious - MXT
+          var carName = "MXT";
+          break;
+        case 19: // Fast n Furious - Ice Charger
+          var carName = "Ice Charger";
+          break;
         case 20: // Nuke Phantom
           var carName = "Nuke Phantom";
           break;
