@@ -8,6 +8,5 @@ foreach ($_POST as $key=>$value) {
 fclose($regfile);
 echo ("RegInfo.txt file updated.<br/>");
 exec("/home/oracle/.config/autostart/register");
-echo ("Exec done.");
 ?>
 <button type="submit" onclick="window.close()">Close</button>
