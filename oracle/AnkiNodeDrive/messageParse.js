@@ -6,8 +6,7 @@ var dateFormat = require('date-format');
 // Config
 //////////////////////////////////////////////////////////
 
-//var sxServer = "streams.opcau.com";
-var sxServer = "129.156.113.223";
+var sxServer = "streams.opcau.com";
 var sxPort = 9004;
 var sxServerUrl = "http://"+sxServer+":"+sxPort;
 var fs = require('fs');
