@@ -133,9 +133,7 @@ exports.install = function(instance) {
     if( lightname === "Tail Flash" && !onoff) { finalUrl = finalUrl + "turnOffTaillights"; }
 
     var carname = instance.options.carname;
-console.log("Carname from setup."+carname);
     if(response.repository !== undefined && response.repository.carname !== undefined) { carname = response.repository.carname; }
-console.log("Carname from repository."+carname);
 
     var finalUrl = finalUrl + "/" + carname;
     U.request(finalUrl, flags, null, function(err, data, status, headers, host) {

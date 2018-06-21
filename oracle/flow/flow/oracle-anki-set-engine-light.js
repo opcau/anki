@@ -127,9 +127,10 @@ exports.install = function(instance) {
 
     if( colour.substr(0,1) !== "#") {
       var toHex = require('colornames')
-      console.log("Convert color name to hex value: "+colour);
       colour = toHex(colour);
-      console.log("after: "+colour);
+    }
+    if(colour === undefined) {
+      colour = "#FFFFFF";
     }
 
     var rgb = instance.custom.hexToRgb(colour.toLowerCase());
@@ -138,9 +139,7 @@ exports.install = function(instance) {
     var blue = Math.floor(rgb.b/16);
 
     var carname = instance.options.carname;
-console.log("Car name from settings: "+carname);
     if(response.repository !== undefined && response.repository.carname !== undefined) { carname = response.repository.carname; }
-console.log("Car name from repository: "+carname);
 
     var finalUrl = "http://localhost:7801/setEngineLight/"+carname+"/"+red+"/"+green+"/"+blue;
     U.request(finalUrl, flags, null, function(err, data, status, headers, host) {
