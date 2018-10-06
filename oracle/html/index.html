@@ -27,12 +27,33 @@
             var uiport = l.port;
             return l.protocol + "//" + l.hostname + ":7901";
           }
-          function getFlowHostPort() {
+          function getFlow1HostPort() {
             var thisHost = decodeURIComponent(window.location.href);
             var l = document.createElement("a");
             l.href = thisHost;
             var uiport = l.port;
-            return l.protocol + "//" + l.hostname + ":8000";
+            return l.protocol + "//" + l.hostname + ":8001";
+          }
+          function getFlow2HostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":8002";
+          }
+          function getFlow3HostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":8003";
+          }
+          function getFlow4HostPort() {
+            var thisHost = decodeURIComponent(window.location.href);
+            var l = document.createElement("a");
+            l.href = thisHost;
+            var uiport = l.port;
+            return l.protocol + "//" + l.hostname + ":8004";
           }
 
           function runAction(actionName) {
@@ -46,6 +67,7 @@
             a.appendChild(linkText);
             a.title = "REST API Link";
             a.href = getServerHostPort();
+            a.setAttribute('target', '_blank');
             var sl = document.getElementById("restAPILink");
             sl.appendChild(a);
           }
@@ -54,19 +76,54 @@
             var a = document.createElement('a');
             var linkText = document.createTextNode(url);
             a.appendChild(linkText);
-            a.title = "Rescue Link";
+            a.title = "Drive Link";
             a.href = url;
+            a.setAttribute('target', '_blank');
             var sl = document.getElementById("driveLink");
             sl.appendChild(a);
           }
-          function flowLink() {
-            var url=getFlowHostPort()+"/";
+          function flow1Link() {
+            var url=getFlow1HostPort()+"/";
             var a = document.createElement('a');
             var linkText = document.createTextNode(url);
             a.appendChild(linkText);
-            a.title = "Rescue Link";
+            a.title = "Flow1 Link";
             a.href = url;
-            var sl = document.getElementById("flowLink");
+            a.setAttribute('target', '_blank');
+            var sl = document.getElementById("flow1Link");
+            sl.appendChild(a);
+          }
+          function flow2Link() {
+            var url=getFlow2HostPort()+"/";
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(url);
+            a.appendChild(linkText);
+            a.title = "Flow2 Link";
+            a.href = url;
+            a.setAttribute('target', '_blank');
+            var sl = document.getElementById("flow2Link");
+            sl.appendChild(a);
+          }
+          function flow3Link() {
+            var url=getFlow3HostPort()+"/";
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(url);
+            a.appendChild(linkText);
+            a.title = "Flow3 Link";
+            a.href = url;
+            a.setAttribute('target', '_blank');
+            var sl = document.getElementById("flow3Link");
+            sl.appendChild(a);
+          }
+          function flow4Link() {
+            var url=getFlow4HostPort()+"/";
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(url);
+            a.appendChild(linkText);
+            a.title = "Flow4 Link";
+            a.href = url;
+            a.setAttribute('target', '_blank');
+            var sl = document.getElementById("flow4Link");
             sl.appendChild(a);
           }
           function speedosLink() {
@@ -76,6 +133,7 @@
             a.appendChild(linkText);
             a.title = "Speedometers Link";
             a.href = url;
+            a.setAttribute('target', '_blank');
             var sl = document.getElementById("speedosLink");
             sl.appendChild(a);
           }
@@ -96,14 +154,29 @@
             <td valign="top">
               <h3>Local Links</h3>
               <table>
-                <tr><td>Documentation: </td><td>
-                  <a href='https://opcau.github.io/anki'>https://opcau.github.io/anki</a>
-                </td></tr>
-                <tr><td>Flow UI: </td><td>
-                  <div id='flowLink'"> <script>flowLink();</script> </div>
-                </td></tr>
                 <tr><td>Drive UI: </td><td>
                   <div id='driveLink'"> <script>driveLink();</script> </div>
+                </td></tr>
+                <tr><td>Oracle/Anki Learning System: </td><td>
+                  <a href='https://edu.opcau.com' target='_blank'>https://edu.opcau.com</a>
+                </td></tr>
+                <tr><td>Documentation: </td><td>
+                  <a href='https://opcau.github.io/anki' target='_blank'>https://opcau.github.io/anki</a>
+                </td></tr>
+                <tr><td>Flow UI #1: </td><td>
+                  <div id='flow1Link'"> <script>flow1Link();</script> </div>
+                </td></tr>
+                <tr><td>Flow UI #2: </td><td>
+                  <div id='flow2Link'"> <script>flow2Link();</script> </div>
+                </td></tr>
+                <tr><td>Flow UI #3: </td><td>
+                  <div id='flow3Link'"> <script>flow3Link();</script> </div>
+                </td></tr>
+                <tr><td>Flow UI #4: </td><td>
+                  <div id='flow4Link'"> <script>flow4Link();</script> </div>
+                </td></tr>
+                <tr><td>Oracle Cloud: </td><td>
+                  <div id='oracleCloud'"><a href='https://ankiedu.opcau.com/apex/pdb1/f?p=22790:28' target='_blank'>https://anki.opcau.com</a></div>
                 </td></tr>
                 <tr><td>Speedometers: </td><td>
                   <div id='speedosLink'"> <script>speedosLink();</script> </div>

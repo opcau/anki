@@ -6,9 +6,13 @@ var dateFormat = require('date-format');
 // Config
 //////////////////////////////////////////////////////////
 
-var sxServer = "streams.opcau.com";
-var sxPort = 9004;
-var sxServerUrl = "http://"+sxServer+":"+sxPort;
+//var sxServer = "streams.opcau.com";
+//var sxPort = 9004;
+//var sxServerUrl = "http://"+sxServer+":"+sxPort;
+//var dbServer = "sharedb.opcau.com";
+var dbServer = "ankiedu.opcau.com";
+var dbServerUrl = "https://"+dbServer+"/apex/pdb1/anziot";
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 var fs = require('fs');
 // Pi or VM?
 var devId = "";
@@ -109,12 +113,14 @@ module.exports = function() {
         var MAX_BATTERY_LEVEL=3800 // This is assumed from experience.
         //console.log("Message[0x"+msgId.toString(16)+"][Battery Level1][",data,"]: "+level);
         //console.log("Message[0x"+msgId.toString(16)+"][Battery Level]: "+Math.floor((level / MAX_BATTERY_LEVEL) * 100)+"%");
-        var fullUrl = sxServerUrl+"/v6battery";
+        //var fullUrl = sxServerUrl+"/v6battery";
+        var fullUrl = dbServerUrl+"/v5_anki/battery/";
         var dateTime = new Date().getTime();
         var args = {
           data: {"eventtype": "battery", "groupid":""+groupId,"deviceid":""+devId,"datetime":dateTime,"datetimestr":dateFormat.asString(),"carid":address,"carname":displayName,"batterylevel":level },
           headers: { "Content-Type": "application/json" },
           requestConfig: {
+              rejectUnauthorized: false,
               timeout: 1000, //request timeout in milliseconds 
               noDelay: true, //Enable/disable the Nagle algorithm 
               keepAlive: true, //Enable/disable keep-alive functionalityidle socket. 
@@ -194,7 +200,7 @@ module.exports = function() {
         if(data.readUInt8(10) == 0x47) {
           clockwise = true;
         }
-        //console.log("Message[0x"+msgId.toString(16)+"][Position Update]: ",data," Location: ",trackLocation.toString(16)," id:(",trackId,") ",trackId.toString(16)," offset: ",offset," speed: "+speed+" clockwise: ",clockwise);
+        console.log("Message[0x"+msgId.toString(16)+"][Position Update]: ",data," Location: ",trackLocation.toString(16)," id:(",trackId,") ",trackId.toString(16)," offset: ",offset," speed: "+speed+" clockwise: ",clockwise);
         if(trackId == 33) {
           //console.log("********** Start");
           trackCount[carName] = 0;
@@ -227,7 +233,8 @@ module.exports = function() {
             if(totalLapTime > 1000) // Ignore extreamly short laptimes
             {
               // Send a lap event
-              var fullUrl = sxServerUrl+"/v6lap";
+              //var fullUrl = sxServerUrl+"/v6lap";
+              var fullUrl = dbServerUrl+"/v5_anki/lap/";
               var lapNumber = lapNumbers[carName];
               lapTimes[carName] = new Date(); // For next lap
               lapNumbers[carName] =  lapNumbers[carName] + 1;
@@ -237,6 +244,7 @@ module.exports = function() {
                 data: {"eventtype": "lap", "groupid":""+groupId,"deviceid":""+devId,"datetime":""+dateTime,"datetimestr":dateFormat.asString(),"carid":address,"carname":displayName,"lapnumber": lapNumber, "laptime": totalLapTime, "trackcount": trackCount[carName]},
                 headers: { "Content-Type": "application/json" },
                 requestConfig: {
+                    rejectUnauthorized: false,
                     timeout: 1000, //request timeout in milliseconds 
                     noDelay: true, //Enable/disable the Nagle algorithm 
                     keepAlive: true, //Enable/disable keep-alive functionalityidle socket. 
@@ -272,12 +280,14 @@ module.exports = function() {
           }
           trackCount[carName]=0;
         }
-        var fullUrl = sxServerUrl+"/v6speed";
+        //var fullUrl = sxServerUrl+"/v6speed";
+        var fullUrl = dbServerUrl+"/v5_anki/speed/";
         var dateTime = new Date().getTime();
         var args = {
           data: {"eventtype": "speed", "groupid":""+groupId, "deviceid":""+devId,"datetime":""+dateTime,"datetimestr":dateFormat.asString(),"carid":address,"carname":displayName,"speed":speed },
           headers: { "Content-Type": "application/json" },
           requestConfig: {
+              rejectUnauthorized: false,
               timeout: 1000, //request timeout in milliseconds 
               noDelay: true, //Enable/disable the Nagle algorithm 
               keepAlive: true, //Enable/disable keep-alive functionalityidle socket. 
@@ -316,8 +326,8 @@ module.exports = function() {
       // Message[0x29][Track Event]:  <Buffer 12 29 00 00 10 bf 1f 49 00 ff ff 00 00 54 01 00 00 37 36>
       // It looks like this event has changed from the SDK.  After much trial/error, I found an interesting bit of info from the message to help me figure out the shape of the track.
       else if (msgId == 0x29) { // ANKI_VEHICLE_MSG_V2C_LOCALIZATION_TRANSITION_UPDATE
-        //console.log("Message[0x"+msgId.toString(16)+"][Track Event]: ",data);
-        //console.log("Size: "+data.length);
+        console.log("Message[0x"+msgId.toString(16)+"][Track Event]: ",data);
+        console.log("Size: "+data.length);
         // Also send battery info
         //console.log("Request Battery Level: "+carName);
         if(sendBatteryCount > sendBatteryFrequency) {
@@ -364,12 +374,14 @@ module.exports = function() {
         trackCount[carName]=trackCount[carName]+1;
 
         // Send to OSA
-        var fullUrl = sxServerUrl+"/v6track";
+        //var fullUrl = sxServerUrl+"/v6track";
+        var fullUrl = dbServerUrl+"/v5_anki/track/";
         var dateTime = new Date().getTime();
         var args = {
           data: {"eventtype": "tracktransition", "groupid":""+groupId,"deviceid":""+devId,"datetime":""+dateTime,"datetimestr":dateFormat.asString(),"carid":address,"carname":displayName,"fromtrackid":fromTrackId,"totrackid":toTrackId,"leftdistcm":leftWheelDistance,"rightdistcm":rightWheelDistance,"lanemm":lanemm,"trackstyle":trackStyle,"trackid":trackCount[carName]},
           headers: { "Content-Type": "application/json" },
           requestConfig: {
+              rejectUnauthorized: false,
               timeout: 1000, //request timeout in milliseconds 
               noDelay: true, //Enable/disable the Nagle algorithm 
               keepAlive: true, //Enable/disable keep-alive functionalityidle socket. 
@@ -408,12 +420,14 @@ module.exports = function() {
         //
         // Send simple off track
         //
-        var fullUrl = sxServerUrl+"/v6offtrack";
+        //var fullUrl = sxServerUrl+"/v6offtrack";
+        var fullUrl = dbServerUrl+"/v5_anki/offTrack/";
         var dateTime = new Date().getTime();
         var args = {
           data: {"eventtype": "offtrack", "groupid":""+groupId,"deviceid":""+devId,"datetime":""+dateTime,"datetimestr":dateFormat.asString(),"carid":address,"carname":displayName,"eventname":"off track","trackid":trackCount[carName]},
           headers: { "Content-Type": "application/json" },
           requestConfig: {
+              rejectUnauthorized: false,
               timeout: 1000, //request timeout in milliseconds 
               noDelay: true, //Enable/disable the Nagle algorithm 
               keepAlive: true, //Enable/disable keep-alive functionalityidle socket. 
@@ -423,6 +437,7 @@ module.exports = function() {
               timeout: 1000 //response timeout 
           }
         }
+console.log("Sending offtrack to "+fullUrl);
         var req = client.post(fullUrl, args, function(data,response) { });
         req.on('requestTimeout', function (req) { console.log('request has expired'); req.abort(); });
         req.on('responseTimeout', function (res) { console.log('response has expired'); });

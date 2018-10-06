@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Dep Edu Network SEtup
+Comment=Setup network for NSW Dep of Edu
+Exec=/home/oracle/bin/setupNetwork.sh
+Icon=/usr/share/icons/nuoveXT2/96x96/places/network.png
+Terminal=false
+Type=Application
+Categories=Application;

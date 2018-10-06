@@ -1,0 +1,25 @@
+{
+	"name": "emptyproject",
+	"description": "Total.js empty project.",
+	"version": "1.0.0",
+	"main": "debug.js",
+	"dependencies": {
+		"html5-websocket": "^2.0.2",
+		"mosca": "^2.8.1",
+		"mqtt": "^2.18.0",
+		"node-schedule": "^1.3.0",
+		"pm2": "^2.10.3",
+		"reconnecting-websocket": "^3.2.2",
+		"ssml-builder": "^0.4.3",
+		"total.js": "latest"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"empty",
+		"project"
+	],
+	"author": "Peter Širka",
+	"license": "MIT"
+}

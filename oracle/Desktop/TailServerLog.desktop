@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Tail Server Log
-Comment=Tail Server Log
-Exec=/usr/bin/tail -f /home/oracle/AnkiNodeDrive.log
-Icon=/home/oracle/AnkiNodeDrive/icons/Log.jpg
-Terminal=true 
-Type=Application
-Categories=Application;

@@ -823,7 +823,7 @@ app.get('/getTrackMapData', function (req, res) {
  *   "result": "Success"
  * }
  */
-app.get('/getTrackMap/:size', function (req, res) {
+app.get('/getTrackMap/:size/:base64?', function (req, res) {
     var size = req.params.size
     if(size != "small" && size != "medium" && size != "large") {
       res.send(JSON.stringify({ result: "Error", message: "Size must be 'small', 'medium' or 'large'"}));
@@ -835,11 +835,18 @@ app.get('/getTrackMap/:size', function (req, res) {
       res.end();
       return;
     }
-    var canvas = trackMap.getTrackMap(size);
+console.log("Base64: "+req.params.base64);
+    if(req.params.base64 !== undefined) {
+      var canvas = trackMap.getTrackMap(size);
+      res.send(canvas.toDataURL());
+      res.end();
+    } else {
+      var canvas = trackMap.getTrackMap(size);
 //    res.send('<img src="' + canvas.toDataURL() + '" />');
-    var stream = canvas.createPNGStream();
-    res.type("png");
-    stream.pipe(res);   
+      var stream = canvas.createPNGStream();
+      res.type("png");
+      stream.pipe(res);   
+    }
 });
 
 app.get('/exit', function (req, res) {
