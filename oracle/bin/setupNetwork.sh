@@ -39,22 +39,27 @@ if [ "${useNetwork}" = "Yes" ]; then
   sudo mv /etc/cntlm.conf /etc/cntlm.conf.old
   sudo cp /etc/cntlm.detnsw /etc/cntlm.conf
   sudo sed -i -e 's/USERNAME/'${user}'/g' /etc/cntlm.conf
-  hashes=$(echo ${pass} | cntlm -H)
+  hashes=$(echo ${pass} | cntlm -H -u ${user} -d detnsw)
   echo "Hashes: ${hashes}"
   lmarr=(${hashes///})
+  echo "LMARR: ${lmarr}"
   passlm=${lmarr[2]}
+  echo "passlm: ${passlm}"
   passnt=${lmarr[4]}
-  passsntlmv2=${lmarr[6]}
+  echo "passnt: ${passnt}"
+  passntlmv2=${lmarr[6]}
+  echo "passntlmv2: ${passntlmv2}"
   echo "LM: ${passlm}"
   echo "NT: ${passnt}"
-  echo "v2: ${passsntlmv2}"
+  echo "v2: ${passntlmv2}"
   sudo sed -i -e 's/PASSLM/'${passlm}'/' /etc/cntlm.conf
-  sudo sed -i -e 's/PASSNT/'${passnt}'/' /etc/cntlm.conf
   sudo sed -i -e 's/PASSNTLMV2/'${passntlmv2}'/' /etc/cntlm.conf
+  sudo sed -i -e 's/PASSNT/'${passnt}'/' /etc/cntlm.conf
   sudo cp /etc/environment.detnsw /etc/environment
   sudo echo "Acquire::http::Proxy "http://localhost:3128/";" > /etc/apt/apt.conf.d/10proxy
   sudo systemctl enable cntlm
   sudo systemctl start cntlm
+  sudo systemctl restart cntlm
   zenity --info --text "Network set to work in the school.  Please reboot the Pi."
 else
   sudo cp /etc/environment.normal /etc/environment

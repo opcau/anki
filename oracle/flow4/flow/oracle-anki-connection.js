@@ -11,7 +11,7 @@ exports.options = { condiscon: true, carname: "All" };
 exports.cloning = false;
 
 exports.html = `<div class="padding">
-  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice">@(Car Name)</div>
+  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice,Ice Charger">@(Car Name)</div>
   <div data-jc="togglebutton" data-jc-path="condiscon"">@(Connect/Disconnect)</div>
 </div>
 <script>
@@ -52,6 +52,7 @@ ON('save.oracleankiconnection', function(component, options) {
       case "Nuke Phantom": component.color = "#FDFDFD"; break;
       case "X52": component.color = "#DF2a32"; break;
       case "X52 Ice": component.color = "#F0F0FF"; break;
+      case "Ice Charger": component.color = "#F0F0FF"; break;
       case "Free Wheel": component.color = "#A2C84E"; break;
     }
   } else {
@@ -76,6 +77,7 @@ ON('save.oracleankiconnection', function(component, options) {
           case "Nuke Ice": component.color = "#FDFDFD"; break;
           case "X52": component.color = "#DF2a32"; break;
           case "X52 Ice": component.color = "#F0F0FF"; break;
+          case "Ice Charger": component.color = "#F0F0FF"; break;
           case "Free Wheel": component.color = "#A2C84E"; break;
         }
       }

@@ -27,6 +27,7 @@ exports.html = `<div class="padding">
         <div data-jc="checkbox" data-jc-path="FreeWheel">@(Free Wheel)</div>
         <div data-jc="checkbox" data-jc-path="X52">@(X52)</div>
         <div data-jc="checkbox" data-jc-path="X52Ice">@(X52 Ice)</div>
+        <div data-jc="checkbox" data-jc-path="IceCharger">@(Ice Charger)</div>
       </div>
   </section>
   </div>
@@ -62,6 +63,7 @@ ON('save.oracleankievents', function(component, options) {
       case "Nuke Phantom": component.color = "#FDFDFD"; break;
       case "X52": component.color = "#DF2a32"; break;
       case "X52 Ice": component.color = "#F0F0FF"; break;
+      case "Ice Charger": component.color = "#F0F0FF"; break;
       case "Free Wheel": component.color = "#A2C84E"; break;
     }
   } else {
@@ -86,6 +88,7 @@ ON('save.oracleankievents', function(component, options) {
           case "Nuke Ice": component.color = "#FDFDFD"; break;
           case "X52": component.color = "#DF2a32"; break;
           case "X52 Ice": component.color = "#F0F0FF"; break;
+          case "Ice Charger": component.color = "#F0F0FF"; break;
           case "Free Wheel": component.color = "#A2C84E"; break;
         }
       }
@@ -127,6 +130,7 @@ exports.install = function(instance) {
       if( instance.options.FreeWheel ) { carlist = carlist + ",Free Wheel"; }
       if( instance.options.X52 ) { carlist = carlist + ",X52"; }
       if( instance.options.X52Ice ) { carlist = carlist + ",X52 Ice"; }
+      if( instance.options.IceCharger ) { carlist = carlist + ",Ice Charger"; }
       if( carlist.length > 0) { carlist = carlist.substring(1); }
     } else {
       carlist = "All";
