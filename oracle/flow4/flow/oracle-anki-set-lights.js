@@ -11,7 +11,7 @@ exports.options = { carname: "All", onoff: true, lightname: "Tail Flash" };
 exports.cloning = false;
 
 exports.html = `<div class="padding">
-  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock, Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice,Ice Charger">@(Car Name)</div>
+  <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock, Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice,Ice Charger,MXT">@(Car Name)</div>
   <div data-jc="togglebutton" data-jc-path="onoff"" data-jc-config="required:false">@(On/Off)</div>
   <div data-jc="dropdown" data-jc-path="lightname" data-jc-config="required:true;items:Head Flash, Tail, Tail Flash">@(Light Name)</div>
 </div>
@@ -50,11 +50,12 @@ ON('save.oracleankisetlights', function(component, options) {
       case "Ground Shock": component.color = "#1C2D7C"; break;
       case "Big Bang": component.color = "#6d7563"; break;
       case "Nuke": component.color = "#9cE667"; break;
-      case "Nuke Ice": component.color = "#FDFDFD"; break;
+      case "Nuke Phantom": component.color = "#DDDDDD"; break;
       case "X52": component.color = "#DF2a32"; break;
-      case "X52 Ice": component.color = "#F0F0FF"; break;
-      case "Ice Charger": component.color = "#F0F0FF"; break;
+      case "X52 Ice": component.color = "#D0D0DF"; break;
       case "Free Wheel": component.color = "#A2C84E"; break;
+      case "Ice Charger": component.color = "#D0D0DF"; break;
+      case "MXT": component.color = "#0000DF"; break;
     }
   } else {
     if(component.options.carname !== currentCarName) { // car name changed
@@ -64,9 +65,10 @@ ON('save.oracleankisetlights', function(component, options) {
          component.color === "#1C2D7C" ||
          component.color === "#6d7563" ||
          component.color === "#9cE667" ||
-         component.color === "#FDFDFD" ||
+         component.color === "#DDDDDD" ||
          component.color === "#DF2a32" ||
-         component.color === "#F0F0FF" ||
+         component.color === "#D0D0DF" ||
+         component.color === "#0000DF" ||
          component.color === "#A2C84E") {
         switch(component.options.carname) {
           case "Skull": component.color = "#FD5134"; break;
@@ -75,11 +77,12 @@ ON('save.oracleankisetlights', function(component, options) {
           case "Ground Shock": component.color = "#1C2D7C"; break;
           case "Big Bang": component.color = "#6d7563"; break;
           case "Nuke": component.color = "#9cE667"; break;
-          case "Nuke Ice": component.color = "#FDFDFD"; break;
+          case "Nuke Phantom": component.color = "#DDDDDD"; break;
           case "X52": component.color = "#DF2a32"; break;
-          case "X52 Ice": component.color = "#F0F0FF"; break;
-          case "Ice Charger": component.color = "#F0F0FF"; break;
+          case "X52 Ice": component.color = "#D0D0DF"; break;
           case "Free Wheel": component.color = "#A2C84E"; break;
+          case "Ice Charger": component.color = "#D0D0DF"; break;
+          case "MXT": component.color = "#0000DF"; break;
         }
       }
     }

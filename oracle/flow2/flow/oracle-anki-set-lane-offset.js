@@ -1,44 +1,31 @@
-exports.id = 'oracleankiconnection';
-exports.title = 'Oracle/Anki Connection';
+exports.id = 'oracleankisetlaneoffset';
+exports.title = 'Oracle/Anki Set Lane Offset';
 exports.group = 'Oracle/Anki';
 exports.color = '#FF2222';
-exports.icon = 'plug';
+exports.icon = 'road';
 exports.output = 1;
 exports.input = true;
 exports.version = '1.0.0';
 exports.author = 'John Graves';
-exports.options = { condiscon: true, carname: "All" };
+exports.options = { carname: "All", offset: "Left" };
 exports.cloning = false;
 
 exports.html = `<div class="padding">
   <div data-jc="dropdown" data-jc-path="carname" data-jc-config="required:true;items:All,Skull,Thermo,Ground Shock,Guardian,Big Bang,Nuke,Nuke Phantom,Free Wheel,X52,X52 Ice,Ice Charger,MXT">@(Car Name)</div>
-  <div data-jc="togglebutton" data-jc-path="condiscon"">@(Connect/Disconnect)</div>
+  <hr/>
+  <h3>Set current lane OR position value between -64(Left) and +64(Right).  (-24/24 are lanes two and three.)</h3>
+  <div data-jc="dropdown" data-jc-path="offset" data-jc-config="required:false;items:Left,Left Middle,Right Middle, Right">@(Lane)</div>
+  <div data-jc="textbox" data-jc-path="offsetvalue" data-jc-config="required:false;increment:false;type:number;align:center">@(Lane Value)</div>
 </div>
 <script>
 var currentCarName;
-ON('save.oracleankiconnection', function(component, options) {
+ON('save.oracleankisetlaneoffset', function(component, options) {
   if(component.name === undefined) {
-    if(options.condiscon) {
-      component.name = options.carname+": Connect";
-    } else {
-      component.name = options.carname+": Disconnect";
-    }
+    component.name = options.carname+": "+options.offset + " Lane";
   } else {
-    matchesArray = component.name.match("(.+): Connect"); 
+    matchesArray = component.name.match("(.+): (.+) Lane"); 
     if(matchesArray !== null && matchesArray.length > 0) {
-      if(options.condiscon) {
-        component.name = options.carname+": Connect";
-      } else {
-        component.name = options.carname+": Disconnect";
-      }
-    }
-    matchesArray = component.name.match("(.+): Disconnect"); 
-    if(matchesArray !== null && matchesArray.length > 0) {
-      if(options.condiscon) {
-        component.name = options.carname+": Connect";
-      } else {
-        component.name = options.carname+": Disconnect";
-      }
+      component.name = options.carname+": "+options.offset + " Lane";
     }
   }
   if(component.color === undefined) {
@@ -87,20 +74,23 @@ ON('save.oracleankiconnection', function(component, options) {
     }
   }
 });
-ON('open.oracleankiconnection', function(component, options) {
+ON('open.oracleankisetlaneoffset', function(component, options) {
   currentCarName = options.carname;
 });
+
 </script>`;
+
 
 exports.readme = `# Request
 
-This component connects or disconnects a car.
+This component creates a websocket to the given URI and outputs data received.
 
 __Dynamic arguments__:
 Are performed via FlowData repository and can be used for URL address. Use \`repository\` component for creating of dynamic arguments. Dynamic values are replaced in the form \`{key}\`:
 
 - carname e.g. Nuke
-- condiscon e.g. Connect or Disconnect`;
+- offset e.g. Left
+- offsetvalue e.g. -64`;
 
 exports.install = function(instance) {
 
@@ -120,19 +110,33 @@ exports.install = function(instance) {
     var flags = [];
     flags.push("post");
 
-    var condiscon = "connect";
-    if(!instance.options.condiscon) {
-      condiscon = "disconnect";
-    }
-    if(response.repository !== undefined && response.repository.carname !== undefined) { condiscon = response.repository.condiscon.toLowerCase(); }
+    var offsetvalue = instance.options.offsetvalue;
+    if(response.repository !== undefined && response.repository.offsetvalue !== undefined) { offsetvalue = response.repository.offsetvalue; }
 
+    if(offsetvalue === undefined) {
+      var lane = instance.options.lane;
+      if(response.repository !== undefined && response.repository.lane !== undefined) { lane = response.repository.lane; }
+
+      var offsetvalue = 0;
+      switch(lane.toLowerCase()) {
+        case "left": offsetvalue = -68; break;
+        case "left middle": offsetvalue = -24; break;
+        case "right middle": offsetvalue = 24; break;
+        case "right": offsetvalue = 68; break;
+        default : offsetvalue = 24; break;
+      }
+    }
+    if(offsetvalue > 64) { offsetvalue = 64; }
+    if(offsetvalue < -64) { offsetvalue = -64; }
     var carname = instance.options.carname;
     if(response.repository !== undefined && response.repository.carname !== undefined) { carname = response.repository.carname; }
 
-    var finalUrl = "http://localhost:7801/"+condiscon+"/"+carname;
+    var finalUrl = "http://localhost:7801/setLaneOffset/"+carname+"/"+offsetvalue;
+    instance.status(carname+": "+offsetvalue);
     U.request(finalUrl, flags, null, function(err, data, status, headers, host) {
       if (response && !err) {
         response.data = { data: data, status: status, headers: headers, host: host };
+        instance.status(carname + ": "+lane );
         instance.send2(response);
       } else if (err)
         instance.error(err, response);
