@@ -41,10 +41,10 @@ echo "City $City"
 echo "Email $ContactEmail"
 echo "SwVersion $SwVersion"
 echo "MyIP $myip"
-curl -v --insecure -X POST -H "city: ${City}" -H "desc: ${Description}" -H "devicetype: ${DeviceType}" -H "devid: ${DevId}" -H "groupid: ${GroupID}" -H "name: ${Name}" -H "region: ${Region}" -H "swversion: ${SwVersion}" -H "email: ${ContactEmail}" -H "hostip: ${myip}" "https://sharedb.opcau.com/apex/pdb1/anziot/v6_anki/register/"
+curl -v --insecure -X POST -H "city: ${City}" -H "desc: ${Description}" -H "devicetype: ${DeviceType}" -H "devid: ${DevId}" -H "groupid: ${GroupID}" -H "name: ${Name}" -H "region: ${Region}" -H "swversion: ${SwVersion}" -H "email: ${ContactEmail}" -H "hostip: ${myip}" "https://anki.opcau.com/apex/pdb1/anziot/v6_anki/register/"
 
 export GroupIDEsc=$( echo "$GroupID" | sed 's/ /%20/g' )
-portMinorNumber=`curl --insecure -s "https://sharedb.opcau.com/apex/pdb1/anziot/v6_anki/devicePort/${GroupIDEsc}" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["items"][0]["port"]'`
+portMinorNumber=`curl --insecure -s "https://anki.opcau.com/apex/pdb1/anziot/v6_anki/devicePort/${GroupIDEsc}" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["items"][0]["port"]'`
 echo "Port Number: ${portMinorNumber}"
 basePort="${portMinorNumber}"
 echo "${basePort}" > ${homedir}/basePort.txt
